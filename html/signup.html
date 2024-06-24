@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+    <link rel="stylesheet" href="../css/signup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="../js/signup.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">BLOOD DONATE APP</div>
+      <div class="signup-container">
+        <div class="signup-heading">Signup</div>
+        <div id="input-container-1">
+          <div class="left-container">
+            <div class="name-container">
+              <div>Name :</div>
+              <input id="name" type="text" />
+              <div class="error-container" id="name-error"></div>
+            </div>
+            <div class="email-container">
+              <div>Email :</div>
+              <input id="email" type="email" />
+              <div class="error-container" id="email-error"></div>
+            </div>
+            <div class="gender-container">
+              <div>Gender :</div>
+              <div class="gender-options-container">
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="male" />
+                  <div>Male</div>
+                </div>
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="female" />
+                  <div>Female</div>
+                </div>
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="other" />
+                  <div>Other</div>
+                </div>
+              </div>
+              <div class="error-container" id="gender-error"></div>
+            </div>
+            <div class="dob-container">
+              <div>Date Of Birth :</div>
+              <input id="dob" type="date" />
+              <div class="error-container" id="dob-error"></div>
+            </div>
+            <div class="contact-number-container">
+              <div>Contact Number :</div>
+              <input id="contact-number" type="number" />
+              <div class="error-container" id="contact-number-error"></div>
+            </div>
+          </div>
+          <div class="middle-container">
+            <div class="state-container">
+              <div>State :</div>
+              <select id="state" >
+                <option value="" disabled selected>Select your state</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="AR">Arunachal Pradesh</option>
+                <option value="AS">Assam</option>
+                <option value="BR">Bihar</option>
+                <option value="CT">Chhattisgarh</option>
+                <option value="GA">Goa</option>
+                <option value="GJ">Gujarat</option>
+                <option value="HR">Haryana</option>
+                <option value="HP">Himachal Pradesh</option>
+                <option value="JK">Jammu and Kashmir</option>
+                <option value="JH">Jharkhand</option>
+                <option value="KA">Karnataka</option>
+                <option value="KL">Kerala</option>
+                <option value="MP">Madhya Pradesh</option>
+                <option value="MH">Maharashtra</option>
+                <option value="MN">Manipur</option>
+                <option value="ML">Meghalaya</option>
+                <option value="MZ">Mizoram</option>
+                <option value="NL">Nagaland</option>
+                <option value="OR">Odisha</option>
+                <option value="PB">Punjab</option>
+                <option value="RJ">Rajasthan</option>
+                <option value="SK">Sikkim</option>
+                <option value="TN">Tamil Nadu</option>
+                <option value="TG">Telangana</option>
+                <option value="TR">Tripura</option>
+                <option value="UP">Uttar Pradesh</option>
+                <option value="UT">Uttarakhand</option>
+                <option value="WB">West Bengal</option>
+                <option value="AN">Andaman and Nicobar Islands</option>
+                <option value="CH">Chandigarh</option>
+                <option value="DH">
+                  Dadra and Nagar Haveli and Daman and Diu
+                </option>
+                <option value="LD">Lakshadweep</option>
+                <option value="DL">Delhi</option>
+                <option value="PY">Puducherry</option>
+                <option value="LA">Ladakh</option>
+              </select>
+              <div class="error-container" id="state-error"></div>
+            </div>
+            <div class="city-container">
+              <div>City :</div>
+              <input id="city" type="text" />
+              <div class="error-container" id="city-error"></div>
+            </div>
+            <div class="address-container">
+              <div>Address :</div>
+              <textarea id="address"></textarea>
+              <div class="error-container" id="address-error"></div>
+            </div>
+            <div class="postal-code-container">
+              <div>Postal Code :</div>
+              <input id="postal-code" type="number" />
+              <div class="error-container" id="postal-code-error"></div>
+            </div>
+            <div class="role-container">
+              <div>Role :</div>
+              <select id="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="Member">Requester</option>
+                <option value="Member">Donor</option>
+                <option value="Admin">Admin</option>
+                <option value="CenterAdmin">Center Admin</option>
+              </select>
+              <div class="error-container" id="role-error"></div>
+            </div>
+          </div>
+          <div class="right-container">
+            <div id="center-id-container">
+              <div>Center Name:</div>
+              <select id="center-id"></select>
+              <div class="error-container" id="center-id-error"></div>
+            </div>
+            <div class="create-password-container">
+              <div>Create Password :</div>
+              <input id="create-password" type="password" />
+              <div class="error-container" id="create-password-error"></div>
+            </div>
+            <div class="confirm-password-container">
+              <div>Confirm Password :</div>
+              <div class="confirm-password-input-container">
+                <input id="confirm-password" type="password" />
+                <i id="togglePassword" class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+              </div>
+              <div class="error-container" id="confirm-password-error"></div>
+            </div>
+          </div>
+        </div>
+        <div id="input-container-2">
+          <div class="left-container">
+            <div class="name-container">
+              <div>Name :</div>
+              <input id="name" type="text" />
+              <div class="error-container">Error</div>
+            </div>
+            <div class="email-container">
+              <div>Email :</div>
+              <input id="email" type="email" />
+              <div class="error-container"></div>
+            </div>
+            <div class="gender-container">
+              <div>Gender :</div>
+              <div class="gender-options-container">
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="male" />
+                  <div>Male</div>
+                </div>
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="female" />
+                  <div>Female</div>
+                </div>
+                <div class="gender-options">
+                  <input type="radio" name="gender" value="other" />
+                  <div>Other</div>
+                </div>
+              </div>
+              <div class="error-container">Error</div>
+            </div>
+            <div class="dob-container">
+              <div>Date Of Birth :</div>
+              <input id="dob" type="date" />
+              <div class="error-container"></div>
+            </div>
+            <div class="contact-number-container">
+              <div>Contact Number :</div>
+              <input id="contact-number" type="number" />
+              <div class="error-container"></div>
+            </div>
+            <div class="state-container">
+              <div>State :</div>
+              <select id="state" required>
+                <option value="" disabled selected>Select your state</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="AR">Arunachal Pradesh</option>
+                <option value="AS">Assam</option>
+                <option value="BR">Bihar</option>
+                <option value="CT">Chhattisgarh</option>
+                <option value="GA">Goa</option>
+                <option value="GJ">Gujarat</option>
+                <option value="HR">Haryana</option>
+                <option value="HP">Himachal Pradesh</option>
+                <option value="JK">Jammu and Kashmir</option>
+                <option value="JH">Jharkhand</option>
+                <option value="KA">Karnataka</option>
+                <option value="KL">Kerala</option>
+                <option value="MP">Madhya Pradesh</option>
+                <option value="MH">Maharashtra</option>
+                <option value="MN">Manipur</option>
+                <option value="ML">Meghalaya</option>
+                <option value="MZ">Mizoram</option>
+                <option value="NL">Nagaland</option>
+                <option value="OR">Odisha</option>
+                <option value="PB">Punjab</option>
+                <option value="RJ">Rajasthan</option>
+                <option value="SK">Sikkim</option>
+                <option value="TN">Tamil Nadu</option>
+                <option value="TG">Telangana</option>
+                <option value="TR">Tripura</option>
+                <option value="UP">Uttar Pradesh</option>
+                <option value="UT">Uttarakhand</option>
+                <option value="WB">West Bengal</option>
+                <option value="AN">Andaman and Nicobar Islands</option>
+                <option value="CH">Chandigarh</option>
+                <option value="DH">
+                  Dadra and Nagar Haveli and Daman and Diu
+                </option>
+                <option value="LD">Lakshadweep</option>
+                <option value="DL">Delhi</option>
+                <option value="PY">Puducherry</option>
+                <option value="LA">Ladakh</option>
+              </select>
+              <div class="error-container"></div>
+            </div>
+            <div class="city-container">
+              <div>City :</div>
+              <input id="city" type="text" />
+              <div class="error-container"></div>
+            </div>
+          </div>
+          <div class="right-container">
+            <div class="address-container">
+              <div>Address :</div>
+              <textarea id="address"></textarea>
+              <div class="error-container"></div>
+            </div>
+            <div class="postal-code-container">
+              <div>Postal Code :</div>
+              <input id="postal-code" type="number" />
+              <div class="error-container"></div>
+            </div>
+            <div class="role-container">
+              <div>Role :</div>
+              <select id="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="Member">Requester</option>
+                <option value="Member">Donor</option>
+                <option value="Admin">Admin</option>
+                <option value="CenterAdmin">Center Admin</option>
+              </select>
+              <div class="error-container"></div>
+            </div>
+            <div id="center-id-container">
+              <div>Center Id :</div>
+              <input id="centerId" type="number" />
+              <div class="error-container"></div>
+            </div>
+            <div class="create-password-container">
+              <div>Create Password :</div>
+              <input id="create-password" type="password" />
+              <div class="error-container"></div>
+            </div>
+            <div class="confirm-password-container">
+              <div>Confirm Password :</div>
+              <div class="confirm-password-input-container">
+                <input id="confirm-password" type="password" />
+                <i id="togglePassword" class="fas fa-eye toggle-password"></i>
+              </div>
+              <div class="error-container">Error</div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-btn-container">
+          <div id="submit-btn" class="submit-btn" onclick="signUp()">Signup</div>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

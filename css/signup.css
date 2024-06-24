@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+body,html{
+    overflow: hidden;
+}
+
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 0, 0, 0.836);
+}
+
+.heading {
+    font-weight: 600;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.signup-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+#input-container-1{
+    padding: 1rem 1.8rem 1rem 1.8rem;
+    display: flex;
+    column-gap: 5rem;
+}
+
+.left-container , .right-container , .middle-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.2rem;
+}
+
+.right-container {
+    row-gap: 1.7rem;
+}
+
+.email-container , 
+.name-container , 
+.gender-container ,
+.dob-container , 
+.contact-number-container ,
+.state-container , 
+.city-container ,
+.address-container,
+.postal-code-container,
+.role-container,
+#center-id-container,
+.create-password-container,
+.confirm-password-container{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.email-container>input,
+.name-container > input,
+.dob-container > input,
+.contact-number-container>input,
+.state-container > select,
+.city-container > input,
+.address-container > textarea,
+.postal-code-container > input,
+.role-container > select,
+#center-id-container > input,
+.create-password-container > input,
+.confirm-password-input-container>input{
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid grey;
+    outline: none;
+    margin-top: 0.3rem;
+}
+
+
+
+.gender-options-container{
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+
+.gender-options{
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.1rem;
+    font-size: 1rem;
+}
+
+.confirm-password-input-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 1rem;
+    color: grey;
+    top:17px;
+}
+
+.submit-btn{
+    background-color: rgb(1, 113, 211);
+    padding: 0.5rem 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.signup-heading{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top:1rem;
+    text-align: center;
+}
+
+.submit-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#input-container-2 {
+    display: none;
+}
+
+.error-container{
+    color: Red;
+}
+
+#center-id-container{
+    display: none;
+}
+
+
+
+@media (max-width : 1190px) and (min-width : 768px) {
+    #input-container-1{
+        display: none;
+    }
+    #input-container-2{
+        display: flex;
+        padding: 2rem;
+        column-gap: 5rem ;
+    }
+
+    .right-container {
+        row-gap: 2rem;
+    }
+
+
+}
+
+@media (max-width: 767px) {
+    #input-container-1{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        padding: 2rem;
+    }
+
+    .signup-container::after{
+        content: ' ';
+        margin-top: 10rem;
+    }
+
+    .right-container {
+        row-gap: 1rem;
+    }
+   
+     .gender-options{
+        align-items: center;
+     }
+    .container{
+        overflow: auto;
+    }
+
+    .signup-container{
+        overflow: auto;
+    }
+
+    .submit-btn{
+        padding: 0.5rem 1.2rem;
+    }
+    .heading{
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+
+    select,
+    input[type="datetime-local"] ,
+    input[type="date"]{
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+        appearance: none;
+        background-color: white;
+        color: black;
+        padding: 0.6rem;
+    }
+}
