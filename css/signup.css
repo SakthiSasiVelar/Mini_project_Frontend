@@ -81,9 +81,9 @@ body,html{
 .address-container > textarea,
 .postal-code-container > input,
 .role-container > select,
-#center-id-container > input,
 .create-password-container > input,
-.confirm-password-input-container>input{
+.confirm-password-input-container>input,
+#center-id-container > select{
     width: 100%;
     padding: 0.6rem;
     border-radius: 0.5rem;

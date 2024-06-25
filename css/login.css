@@ -57,14 +57,14 @@ body,html{
 
 .password-container{
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 #togglePassword{
     position: absolute;
     right:1rem;
+    top:13px;
     color: grey;
+    cursor: pointer;
 }
 
 .email-container > input  , .password-container > input{
@@ -87,6 +87,11 @@ body,html{
     border-radius: 0.5rem;
     color: white;
     text-align: center;
+    cursor: pointer;
+}
+
+.error-container{
+    color: red;
 }
 
 

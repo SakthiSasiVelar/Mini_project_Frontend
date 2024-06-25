@@ -9,7 +9,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <script src="../js/signup.js" defer></script>
+    <script src="../js/signup.js" type="module" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="container">
@@ -60,7 +62,7 @@
           <div class="middle-container">
             <div class="state-container">
               <div>State :</div>
-              <select id="state" >
+              <select id="state">
                 <option value="" disabled selected>Select your state</option>
                 <option value="AP">Andhra Pradesh</option>
                 <option value="AR">Arunachal Pradesh</option>
@@ -145,7 +147,10 @@
               <div>Confirm Password :</div>
               <div class="confirm-password-input-container">
                 <input id="confirm-password" type="password" />
-                <i id="togglePassword" class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                <i
+                  id="togglePassword"
+                  class="fas fa-eye toggle-password"
+                ></i>
               </div>
               <div class="error-container" id="confirm-password-error"></div>
             </div>
@@ -156,12 +161,12 @@
             <div class="name-container">
               <div>Name :</div>
               <input id="name" type="text" />
-              <div class="error-container">Error</div>
+              <div class="error-container" id="name-error"></div>
             </div>
             <div class="email-container">
               <div>Email :</div>
               <input id="email" type="email" />
-              <div class="error-container"></div>
+              <div class="error-container" id="email-error"></div>
             </div>
             <div class="gender-container">
               <div>Gender :</div>
@@ -179,17 +184,17 @@
                   <div>Other</div>
                 </div>
               </div>
-              <div class="error-container">Error</div>
+              <div class="error-container" id="gender-error"></div>
             </div>
             <div class="dob-container">
               <div>Date Of Birth :</div>
               <input id="dob" type="date" />
-              <div class="error-container"></div>
+              <div class="error-container" id="dob-error"></div>
             </div>
             <div class="contact-number-container">
               <div>Contact Number :</div>
               <input id="contact-number" type="number" />
-              <div class="error-container"></div>
+              <div class="error-container" id="contact-number-error"></div>
             </div>
             <div class="state-container">
               <div>State :</div>
@@ -234,24 +239,24 @@
                 <option value="PY">Puducherry</option>
                 <option value="LA">Ladakh</option>
               </select>
-              <div class="error-container"></div>
+              <div class="error-container" id="state-error"></div>
             </div>
             <div class="city-container">
               <div>City :</div>
               <input id="city" type="text" />
-              <div class="error-container"></div>
+              <div class="error-container" id="city-error"></div>
             </div>
           </div>
           <div class="right-container">
             <div class="address-container">
               <div>Address :</div>
               <textarea id="address"></textarea>
-              <div class="error-container"></div>
+              <div class="error-container" id="address-error"></div>
             </div>
             <div class="postal-code-container">
               <div>Postal Code :</div>
               <input id="postal-code" type="number" />
-              <div class="error-container"></div>
+              <div class="error-container" id="postal-code-error"></div>
             </div>
             <div class="role-container">
               <div>Role :</div>
@@ -262,32 +267,33 @@
                 <option value="Admin">Admin</option>
                 <option value="CenterAdmin">Center Admin</option>
               </select>
-              <div class="error-container"></div>
+              <div class="error-container" id="role-error"></div>
             </div>
             <div id="center-id-container">
-              <div>Center Id :</div>
-              <input id="centerId" type="number" />
-              <div class="error-container"></div>
+              <div>Center Name :</div>
+              <input id="center-id" type="number" />
+              <div class="error-container" id="center-id-error"></div>
             </div>
             <div class="create-password-container">
               <div>Create Password :</div>
               <input id="create-password" type="password" />
-              <div class="error-container"></div>
+              <div class="error-container" id="create-password-error"></div>
             </div>
             <div class="confirm-password-container">
               <div>Confirm Password :</div>
               <div class="confirm-password-input-container">
                 <input id="confirm-password" type="password" />
-                <i id="togglePassword" class="fas fa-eye toggle-password"></i>
+                <i id="toggle-Password" class="fas fa-eye toggle-password"></i>
               </div>
-              <div class="error-container">Error</div>
+              <div class="error-container" id="confirm-password-error"></div>
             </div>
           </div>
         </div>
         <div class="submit-btn-container">
-          <div id="submit-btn" class="submit-btn" onclick="signUp()">Signup</div>
+          <div id="submit-btn" class="submit-btn">
+            Signup
+          </div>
         </div>
-        
       </div>
     </div>
   </body>

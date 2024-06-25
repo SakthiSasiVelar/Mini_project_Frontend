@@ -9,6 +9,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <script src="../js/login.js" type="module" defer></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="container">
@@ -17,20 +20,21 @@
         <div class="login-container">
           <div class="login-heading">Login</div>
           <div class="email-container">
-            <input type="email" placeholder="Email" id="Email" />
+            <input type="email" placeholder="Email" id="email" />
+            <div class="error-container" id="email-error"></div>
           </div>
           <div class="password-container">
             <input type="password" placeholder="Password" id="password" />
             <i id="togglePassword" class="fas fa-eye toggle-password"></i>
+            <div class="error-container" id="password-error"></div>
           </div>
           <a href="#" class="forgot-password-link">Forgot Password?</a>
-          <div class="login-btn" onclick="login()">Login</div>
+          <div class="login-btn" id="login-btn">Login</div>
           <div>
-            Dont have an account? <a href="#" class="sign-up-link">Signup</a>
+            Dont have an account? <a href="signup.html" class="sign-up-link">Signup</a>
           </div>
         </div>
       </div>
     </div>
-    <script src="../js/login.js"></script>
   </body>
 </html>
