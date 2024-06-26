@@ -22,7 +22,7 @@ async function signUp(){
        try {
             const result = await addUserDetails(newUserDetails);
             if (result.status === 'success') {
-                showSuccessToast("user added successfully")
+                showSuccessToast("Registeration successful")
                 setTimeout(() => {
                     window.location.href = 'login.html';
                 }, 2000); 

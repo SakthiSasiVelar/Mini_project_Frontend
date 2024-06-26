@@ -20,7 +20,9 @@ async function login(){
             if(result.status ==='success'){
                 showSuccessToast('Logged in successfully');
                 addLoginDetailsToSessionStorage(result.data);
-                openHomePage();
+                setTimeout(() => {
+                    openHomePage();
+                }, 2000);    
             }
             else if(result.status === 'error'){
                 showErrorToast(result.message);

@@ -17,3 +17,22 @@ export function makeErrorContainerDisplayNone(idName){
     const errorContainer = document.getElementById(idName);
     errorContainer.style.display = 'none';
 }
+
+export function apiErrorMessage(code , errorMessage){
+    let errorModal = {
+       status : 'error',
+       errorCode : code,
+       messsage : errorMessage
+    }
+    return errorModal;
+}
+
+export function apiSuccessMessage(code , successMessage , setData){
+    let successModal = {
+        status :'success',
+        errorCode : code,
+        messsage : successMessage,
+        data : setData
+    }
+    return successModal;
+}

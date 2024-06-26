@@ -10,19 +10,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <script src="../js/member.js" defer></script>
+    <script src="../js/member.js" type="module" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="container">
       <div class="header">
         <div class="left-header">
-          <div
-            class="menu-container-hamburger"
-            id="hamburger"
-            onclick="showSideBar()"
-          >
-            &#9776;
-          </div>
+          <div class="menu-container-hamburger" id="hamburger">&#9776;</div>
           <div class="circle-1">
             <i class="fa-solid fa-droplet header-icon"></i>
           </div>
@@ -42,11 +41,7 @@
       </div>
       <div class="body-container">
         <div class="sidebar-container-1">
-          <div
-            class="sidebar-item-container"
-            id="profile-container-1"
-            onclick="showProfilePage()"
-          >
+          <div class="sidebar-item-container" id="profile-container-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
             </div>
@@ -54,61 +49,37 @@
               <div>Profile</div>
             </div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-container-request-1"
-            onclick="showDonateToRequestPage()"
-          >
+          <div class="sidebar-item-container" id="donate-container-request-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-sharp fa-solid fa-hand-holding-medical"></i>
             </div>
             <div class="sidebar-item-name">Donate to request</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-container-center-1"
-            onclick="showDonateToCenterPage()"
-          >
+          <div class="sidebar-item-container" id="donate-container-center-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
             </div>
             <div class="sidebar-item-name">Donate to center</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="request-container-1"
-            onclick="showRequestPage()"
-          >
+          <div class="sidebar-item-container" id="request-container-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-droplet"></i>
             </div>
             <div class="sidebar-item-name">Request</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-history-sidebar-1"
-            onclick="showDonateHistoryPage()"
-          >
+          <div class="sidebar-item-container" id="donate-history-sidebar-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-handshake-angle"></i>
             </div>
             <div class="sidebar-item-name">Donation History</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="request-history-sidebar-1"
-            onclick="showRequestHistoryPage()"
-          >
+          <div class="sidebar-item-container" id="request-history-sidebar-1">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-arrows-rotate"></i>
             </div>
             <div class="sidebar-item-name">Request History</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="approve-donation-sidebar-1"
-            onclick="showApproveDonationPage()"
-          >
+          <div class="sidebar-item-container" id="approve-donation-sidebar-1">
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
             </div>
@@ -116,11 +87,7 @@
           </div>
         </div>
         <div class="sidebar-container-2">
-          <div
-            class="sidebar-item-container"
-            id="profile-container-2"
-            onclick="showProfilePage()"
-          >
+          <div class="sidebar-item-container" id="profile-container-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
             </div>
@@ -128,61 +95,37 @@
               <div>Profile</div>
             </div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-container-request-2"
-            onclick="showDonateToRequestPage()"
-          >
+          <div class="sidebar-item-container" id="donate-container-request-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-sharp fa-solid fa-hand-holding-medical"></i>
             </div>
             <div class="sidebar-item-name">Donate to request</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-container-center-2"
-            onclick="showDonateToCenterPage()"
-          >
+          <div class="sidebar-item-container" id="donate-container-center-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
             </div>
             <div class="sidebar-item-name">Donate to center</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="request-container-2"
-            onclick="showRequestPage()"
-          >
+          <div class="sidebar-item-container" id="request-container-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-droplet"></i>
             </div>
             <div class="sidebar-item-name">Request</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="donate-history-sidebar-2"
-            onclick="showDonateHistoryPage()"
-          >
+          <div class="sidebar-item-container" id="donate-history-sidebar-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-handshake-angle"></i>
             </div>
             <div class="sidebar-item-name">Donation History</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="request-history-sidebar-2"
-            onclick="showRequestHistoryPage()"
-          >
+          <div class="sidebar-item-container" id="request-history-sidebar-2">
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-arrows-rotate"></i>
             </div>
             <div class="sidebar-item-name">Request History</div>
           </div>
-          <div
-            class="sidebar-item-container"
-            id="approve-donation-sidebar-2"
-            onclick="showApproveDonationPage()"
-          >
+          <div class="sidebar-item-container" id="approve-donation-sidebar-2">
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
             </div>
@@ -192,125 +135,14 @@
         <div class="content-container">
           <div id="profile-container">
             <div class="content-heading">Profile</div>
-            <div class="profile-content-container">
-              <div class="profile-item-container">
-                <div class="label">Name :</div>
-                <div>Sakthi sasi velar</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Email :</div>
-                <div>sakthisasivelar@gmail.com</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Gender :</div>
-                <div>Male</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Age :</div>
-                <div>21</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Contact-number :</div>
-                <div>1234567890</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">State :</div>
-                <div>Tamil Nadu</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">City :</div>
-                <div>Coimbatore</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Address :</div>
-                <div>116A,ABC STREET CBE</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Postal Code :</div>
-                <div>641668</div>
-              </div>
-            </div>
+            <div class="profile-content-container"></div>
           </div>
           <div id="donate-container-request">
             <div class="content-heading">Donate Blood To Request</div>
             <div class="donateRequest-card-container">
-              <div class="donateRequest-card">
-                <div class="donateRequest-card-item-container">
-                  <div>Patient Name :</div>
-                  <div>Praveen kumar</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>AB</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Rh Factor:</div>
-                  <div>positive</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Units Needed :</div>
-                  <div>15</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Contact Number:</div>
-                  <div>9363125315</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Name :</div>
-                  <div>Abc hospital</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Address :</div>
-                  <div>112,ABC nagar cbe - 641567</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Description :</div>
-                  <div>lorem epsum lorem epsum</div>
-                </div>
-                <div class="donate-btn-container">
-                  <div class="donate-btn">Donate</div>
-                </div>
-              </div>
-              <div class="donateRequest-card">
-                <div class="donateRequest-card-item-container">
-                  <div>Patient Name :</div>
-                  <div>Praveen kumar</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>AB</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Rh Factor:</div>
-                  <div>positive</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Units Needed :</div>
-                  <div>15</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Contact Number:</div>
-                  <div>9363125315</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Name :</div>
-                  <div>Abc hospital</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Address :</div>
-                  <div>112,ABC nagar cbe - 641567</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Description :</div>
-                  <div>lorem epsum lorem epsum</div>
-                </div>
-                <div class="donate-btn-container">
-                  <div class="donate-btn">Donate</div>
-                </div>
-              </div>
             </div>
             <div class="donateRequest-table-container">
-              <table>
+              <table id="donateRequest-table">
                 <thead>
                   <tr>
                     <th>Patient Name</th>
@@ -324,205 +156,11 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Praveen kumar</td>
-                    <td>AB</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>9363125315</td>
-                    <td>Abc hospital</td>
-                    <td>112,ABC nagar cbe - 641567</td>
-                    <td>lorem epsum lorem epsum</td>
-                    <td>
-                      <div class="donate-btn">Donate</div>
-                    </td>
-                  </tr>
+                <tbody id="request-table-body">
                 </tbody>
               </table>
             </div>
+             <div id="no-request-message" class="no-requests" >No requests available!!</div>
           </div>
           <div id="donate-container-center">
             <div class="content-heading">Donate Blood to Center</div>
@@ -915,8 +553,8 @@
                   <div class="request-form-left-container">
                     <div class="request-form-patientName-container">
                       <div>Patient Name :</div>
-                      <input id="patient-name" type="text" />
-                      <div class="error-container"></div>
+                      <input id="request-form-patientName" type="text" />
+                      <div class="error-container" id="patientName-error"></div>
                     </div>
                     <div class="request-form-bloodtype-container">
                       <div>Blood Type :</div>
@@ -929,23 +567,27 @@
                         <option value="O">O</option>
                         <option value="AB">AB</option>
                       </select>
-                      <div class="error-container"></div>
+                      <div class="error-container" id="bloodType-error"></div>
                     </div>
                     <div class="request-form-rhfactor-container">
                       <div>Rh factor :</div>
-                      <select id="request-form-rhfactor" required>
+                      <select id="request-form-rhFactor" required>
                         <option value="" disabled selected>
                           Select the Rh factor
                         </option>
                         <option value="positive">Positive</option>
                         <option value="negative">Negative</option>
                       </select>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="rhFactor-error"></div>
                     </div>
                     <div class="request-form-unitsNeeded-container">
                       <div>Units Needed :</div>
-                      <input type="number" step="any" />
-                      <div class="error-container">Error</div>
+                      <input
+                        type="number"
+                        step="any"
+                        id="request-form-unitsNeeded"
+                      />
+                      <div class="error-container" id="unitsNeeded-error"></div>
                     </div>
                   </div>
                   <div class="request-form-center-container">
@@ -958,39 +600,51 @@
                         <option value="Immediate">Immediate</option>
                         <option value="Within a week">Within a week</option>
                       </select>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="urgency-error"></div>
                     </div>
                     <div class="request-form-contactNumber-container">
                       <div>Contact Number:</div>
-                      <input type="number" />
-                      <div class="error-container">Error</div>
+                      <input type="number" id="request-form-contactNumber" />
+                      <div
+                        class="error-container"
+                        id="contactNumber-error"
+                      ></div>
                     </div>
                     <div class="request-form-description-container">
                       <div>Description :</div>
                       <textarea id="request-form-description"></textarea>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="description-error"></div>
                     </div>
                     <div class="request-hospital-name-container">
                       <div>Hospital Name :</div>
-                      <input type="text" id="request-form-hospital-name" />
-                      <div class="error-container">Error</div>
+                      <input type="text" id="request-form-hospitalName" />
+                      <div
+                        class="error-container"
+                        id="hospitalName-error"
+                      ></div>
                     </div>
                   </div>
                   <div class="request-form-right-container">
                     <div class="request-form-hospital-address-container">
                       <div>Hospital Address :</div>
-                      <textarea id="request-form-description"></textarea>
-                      <div class="error-container">Error</div>
+                      <textarea id="request-form-hospitalAddress"></textarea>
+                      <div
+                        class="error-container"
+                        id="hospitalAddress-error"
+                      ></div>
                     </div>
                     <div class="request-doctor-name-container">
                       <div>Doctor Name :</div>
-                      <input type="text" id="request-form-doctor-name" />
-                      <div class="error-container">Error</div>
+                      <input type="text" id="request-form-doctorName" />
+                      <div class="error-container" id="doctorName-error"></div>
                     </div>
                     <div class="request-form-doctor-number-container">
                       <div>Doctor Number :</div>
-                      <input type="number" id="request-form-doctor-number" />
-                      <div class="error-container">Error</div>
+                      <input type="number" id="request-form-doctorNumber" />
+                      <div
+                        class="error-container"
+                        id="doctorNumber-error"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -998,8 +652,8 @@
                   <div class="request-form-left-container">
                     <div class="request-form-patientName-container">
                       <div>Patient Name :</div>
-                      <input id="patient-name" type="text" />
-                      <div class="error-container"></div>
+                      <input id="request-form-patientName" type="text" />
+                      <div class="error-container" id="patientName-error"></div>
                     </div>
                     <div class="request-form-bloodtype-container">
                       <div>Blood Type :</div>
@@ -1012,23 +666,27 @@
                         <option value="O">O</option>
                         <option value="AB">AB</option>
                       </select>
-                      <div class="error-container"></div>
+                      <div class="error-container" id="bloodType-error"></div>
                     </div>
                     <div class="request-form-rhfactor-container">
                       <div>Rh factor :</div>
-                      <select id="request-form-rhfactor" required>
+                      <select id="request-form-rhFactor" required>
                         <option value="" disabled selected>
                           Select the Rh factor
                         </option>
                         <option value="positive">Positive</option>
                         <option value="negative">Negative</option>
                       </select>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="rhFactor-error"></div>
                     </div>
                     <div class="request-form-unitsNeeded-container">
                       <div>Units Needed :</div>
-                      <input type="number" step="any" />
-                      <div class="error-container">Error</div>
+                      <input
+                        type="number"
+                        step="any"
+                        id="request-form-unitsNeeded"
+                      />
+                      <div class="error-container" id="unitsNeeded-error"></div>
                     </div>
                     <div class="request-form-urgency-container">
                       <div>Urgency :</div>
@@ -1039,44 +697,56 @@
                         <option value="Immediate">Immediate</option>
                         <option value="Within a week">Within a week</option>
                       </select>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="urgency-error"></div>
                     </div>
                     <div class="request-form-contactNumber-container">
                       <div>Contact Number:</div>
-                      <input type="number" />
-                      <div class="error-container">Error</div>
+                      <input type="number" id="request-form-contactNumber" />
+                      <div
+                        class="error-container"
+                        id="contactNumber-error"
+                      ></div>
                     </div>
                   </div>
                   <div class="request-form-right-container">
                     <div class="request-form-description-container">
                       <div>Description :</div>
                       <textarea id="request-form-description"></textarea>
-                      <div class="error-container">Error</div>
+                      <div class="error-container" id="description-error"></div>
                     </div>
                     <div class="request-hospital-name-container">
                       <div>Hospital Name :</div>
-                      <input type="text" id="request-form-hospital-name" />
-                      <div class="error-container">Error</div>
+                      <input type="text" id="request-form-hospitalName" />
+                      <div
+                        class="error-container"
+                        id="hospitalName-error"
+                      ></div>
                     </div>
                     <div class="request-form-hospital-address-container">
                       <div>Hospital Address :</div>
-                      <textarea id="request-form-description"></textarea>
-                      <div class="error-container">Error</div>
+                      <textarea id="request-form-hospitalAddress"></textarea>
+                      <div
+                        class="error-container"
+                        id="hospitalAddress-error"
+                      ></div>
                     </div>
                     <div class="request-doctor-name-container">
                       <div>Doctor Name :</div>
-                      <input type="text" id="request-form-doctor-name" />
-                      <div class="error-container">Error</div>
+                      <input type="text" id="request-form-doctorName" />
+                      <div class="error-container" id="doctorName-error"></div>
                     </div>
                     <div class="request-form-doctor-number-container">
                       <div>Doctor Number :</div>
-                      <input type="number" id="request-form-doctor-number" />
-                      <div class="error-container">Error</div>
+                      <input type="number" id="request-form-doctorNumber" />
+                      <div
+                        class="error-container"
+                        id="doctorNumber-error"
+                      ></div>
                     </div>
                   </div>
                 </div>
                 <div class="submit-btn-container">
-                  <div id="submit-btn" class="submit-btn">Request</div>
+                  <div id="request-submit-btn" class="submit-btn">Request</div>
                 </div>
               </div>
             </div>
