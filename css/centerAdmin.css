@@ -163,6 +163,10 @@ html {
     row-gap: 2rem;
 }
 
+.center-information-content-container{
+    row-gap: 3rem;
+}
+
 .profile-item-container,
 .center-information-item-container {
     display: flex;
@@ -258,19 +262,23 @@ tbody {
     scrollbar-width: none;
 }
 
-.approve-donation-button,
-.reject-donation-button {
+.approve-donation-button-1,
+.approve-donation-button-2,
+.reject-donation-button-1,
+.reject-donation-button-2 {
     padding: 0.3rem 0.6rem;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.approve-donation-button {
+.approve-donation-button-1,
+.approve-donation-button-2{
     background-color: green;
 }
 
-.reject-donation-button {
+.reject-donation-button-1,
+ .reject-donation-button-2{
     background-color: red;
 }
 
@@ -367,6 +375,7 @@ tbody {
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 
@@ -384,7 +393,7 @@ tbody {
 }
 
 .bloodUnit-card{
-    flex: 1 1 300px;
+    flex: 1 1 350px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 1rem;
@@ -486,8 +495,19 @@ tbody {
     margin-top: 0rem;
 }
 
+.show-message{
+    color: red;
+    text-align: center;
+    font-size: 1.3rem;
+}
 
+#show-approve-donation-message{
+    display: none;
+}
 
+.error-container{
+    color: red;
+}
 
 
 

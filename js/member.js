@@ -1,10 +1,16 @@
-import { getUser ,addRequest, getAllApprovedRequest, addDonationToRequest } from "./api.js";
+import { getUser ,addRequest, getAllApprovedRequest, addDonationToRequest ,rejectDonation,getAllDonateCenters , addDonationToCenter, getDonationHistory ,getRequestHistory,getPendingDonationsForAllRequestOfUser,approveDonation} from "./api.js";
 import {showErrorToast ,showSuccessToast } from "./Toast.js";
 import { makeInputBoxRedColor , makeInputBoxBlackColor , makeErrorContainerDisplayNone,showErrorMessage } from "./Error.js";
 
 document.addEventListener('DOMContentLoaded', fetchProfileDetails);
 
 let approvedRequestListLength = 0;
+let currentDonationCenterId = -1;
+let donationHistory = {};
+let requestHistory = {};    
+let donationListForRequestLength = 0;
+let currentRequestId = -1;
+let currentDonationId = -1;
 
 async function fetchProfileDetails(){
     const userId = sessionStorage.getItem('userId');
@@ -96,7 +102,6 @@ async function getApprovedRequests(){
                loginAgain();
            }
            else{
-            console.log(result);
               showErrorToast('Error occured . Refresh the page');
            }
         }
@@ -225,7 +230,6 @@ async function handleDonate(donateDetails){
                 loginAgain();
             }
             else{
-                console.log(result);
                 showErrorToast('Error in adding donation.Please try again');
             }
         }
@@ -261,6 +265,125 @@ function showDonateToCenterPage(){
     const donateContentContainer = document.getElementById("donate-container-center");
     donateContentContainer.style.display = "block";
     closeSideBar();
+    getDonateCenters();
+}
+
+async function getDonateCenters(){
+    try{
+        const result = await getAllDonateCenters();
+        if(result.status ==='success'){
+            if(result.data.length === 0){
+                showNoDonationCenterMessageInDOM();
+            }
+            else{
+                showDonationCenterInDOM();
+                addDonationCenterToTableDOM(result.data);
+                addDonationCenterToCardDOM(result.data);
+            }
+        }
+        else if(result.status === 'error'){
+            if(result.errorCode === 401 || result.errorCode === 403){
+                loginAgain();
+            }
+            else{
+                showErrorToast('Error in getting donate centers.Please try again');
+            }
+        }
+    }
+    catch(error){
+        showErrorToast('Error in getting donate centers.Please try again');
+        console.log(error);
+    }
+}
+function addDonationCenterToCardDOM(donateCenterList){
+    const cardContainer = document.getElementsByClassName('donateCenter-card-container')[0];
+    cardContainer.innerHTML = '';
+    donateCenterList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('donateCenter-card');
+        card.setAttribute('data-center-id', item.donationCenterId);
+
+        card.innerHTML = `
+            <div class="donateCenter-card-item-container">
+                <div>Center Name :</div>
+                <div>${item.name}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>State :</div>
+                <div>${item.state}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>City :</div>
+                <div>${item.city}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>Address :</div>
+                <div>${item.address}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>Postal Code :</div>
+                <div>${item.postalCode}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>Contact Number :</div>
+                <div>${item.contactNumber}</div>
+            </div>
+            <div class="donateCenter-card-item-container">
+                <div>Operating hours:</div>
+                <div>${item.operatingHours}</div>
+            </div>
+            <div class="donate-btn-container">
+                <div class="donate-btn" data-center-id="${item.donationCenterId}">Donate</div>
+            </div>
+        `;
+
+        card.querySelector('.donate-btn').addEventListener('click', function() {
+            openDonateToCenterDialogForm(); 
+            currentDonationCenterId = item.donationCenterId;
+        });
+
+        cardContainer.appendChild(card);
+    });
+}
+
+function addDonationCenterToTableDOM(donateCenterList){
+    const tableBody = document.getElementById('center-table-body');
+    tableBody.innerHTML = '';
+    donateCenterList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-center-id', item.donationCenterId);
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.state}</td>
+            <td>${item.city}</td>
+            <td>${item.postalCode}</td>
+            <td>${item.address}</td>
+            <td>${item.contactNumber}</td>
+            <td>${item.operatingHours}</td>
+            <td>
+                <div class="donate-btn">Donate</div>
+            </td>
+        `;
+        row.querySelector('.donate-btn').addEventListener('click', function() {
+            openDonateToCenterDialogForm(); 
+            currentDonationCenterId = item.donationCenterId;
+        });
+        tableBody.appendChild(row);
+    });
+}
+
+function showDonationCenterInDOM(){
+    const noDonationCenterMessageContainer = document.getElementById('no-donation-center-message');
+    noDonationCenterMessageContainer.style.display = 'none';
+    const donateCenterTable = document.getElementById('donateCenter-table');
+    donateCenterTable.style.display = 'block';
+}
+
+function showNoDonationCenterMessageInDOM(){
+    const donateCenterTable = document.getElementById('donateCenter-table');
+    donateCenterTable.style.display = 'none';
+    const noDonationCenterMessageContainer = document.getElementById('no-donation-center-message');
+    noDonationCenterMessageContainer.style.display = 'block';
 }
 
 document.getElementById("request-container-1").addEventListener('click',showRequestPage);
@@ -276,7 +399,44 @@ function showRequestPage(){
     const requestContentContainer = document.getElementById("request-container");
     requestContentContainer.style.display = "block";
     closeSideBar();
+    getRequestHistoryFromBackend();
 }
+
+async function getRequestHistoryFromBackend(){
+    try{
+        const result = await getRequestHistory();
+        if(result.status === "success"){
+            requestHistory = result.data;
+            addValuesToRespectiveRequestHistory();
+            getScheduleRequestHistory();
+        }
+        else if(result.status === "error"){
+            if(result.errorCode === 401 || result.errorCode === 403 || result.errorCode === 404){
+                loginAgain();
+            }
+            else{
+                showErrorMessage('Please refresh the page');
+                console.log(result.data);
+            }
+        }
+    }
+    catch(error){
+        showErrorMessage('Please refresh the page');
+        console.log(error);
+    }
+}
+
+function addValuesToRespectiveRequestHistory(){
+    const scheduleRequestHistoryValue = document.getElementById('schedule-request-history-card-value');
+    scheduleRequestHistoryValue.textContent = requestHistory.scheduledRequestHistoryList.length ;
+    const approvedRequestHistoryValue = document.getElementById('approved-request-history-card-value');
+    approvedRequestHistoryValue.textContent = requestHistory.approvedRequestHistoryList.length;
+    const rejectedRequestHistoryValue = document.getElementById('rejected-request-history-card-value');
+    rejectedRequestHistoryValue.textContent = requestHistory.rejectedRequestHistoryList.length;
+}
+
+
+
 
 document.getElementById('donate-history-sidebar-1').addEventListener('click', showDonateHistoryPage);
 document.getElementById('donate-history-sidebar-2').addEventListener('click', showDonateHistoryPage);
@@ -291,7 +451,41 @@ function showDonateHistoryPage(){
     const donateHistoryContentContainer = document.getElementById("donate-history-container");
     donateHistoryContentContainer.style.display = "block";
     closeSideBar();
-    getScheduleDonationHistory();
+    getDonationHistoryFromBackend();
+    
+}
+
+async function getDonationHistoryFromBackend(){
+    try{
+        const result = await getDonationHistory();
+        if(result.status === "success"){
+           donationHistory = result.data;
+           addValuesToRespectiveDonationHistory(donationHistory);
+           getScheduleDonationHistory();
+        }
+        else if(result.status === "error"){
+            if(result.errorCode === 401 || result.errorCode === 403 || result.errorCode === 404){
+                loginAgain();
+            }
+            else{
+                showErrorMessage('Please refresh the page');
+                console.log(result.data);
+            }
+        }
+   }
+    catch(error){
+        showErrorMessage('Please refresh the page');
+        console.log(error);
+    }
+}
+
+function addValuesToRespectiveDonationHistory(donationHistory){
+    const scheduledDonationHistoryValue = document.getElementById('schedule-donation-history-card-value');
+    scheduledDonationHistoryValue.textContent = donationHistory.scheduledDonationHistory.length;
+    const approvedDonationHistoryValue = document.getElementById('approved-donation-history-card-value');
+    approvedDonationHistoryValue.textContent = donationHistory.approvedDonationHistory.length;
+    const rejectedDonationHistoryValue = document.getElementById('rejected-donation-history-card-value');
+    rejectedDonationHistoryValue.textContent = donationHistory.rejectedDonationHistory.length;
 }
 
 document.getElementById("request-history-sidebar-1").addEventListener('click',showRequestHistoryPage);
@@ -307,7 +501,7 @@ function showRequestHistoryPage(){
     const requestHistoryContentContainer = document.getElementById("request-history-container");
     requestHistoryContentContainer.style.display = "block";
     closeSideBar();
-    getScheduleRequestHistory();
+    getRequestHistoryFromBackend();
 }
 
 document.getElementById("approve-donation-sidebar-1").addEventListener('click',showApproveDonationPage);
@@ -323,6 +517,164 @@ function showApproveDonationPage(){
     const approveDonationContentContainer = document.getElementById("approve-donation-container");
     approveDonationContentContainer.style.display = "block";
     closeSideBar();
+    getDonationListFromBackend();
+}
+
+async function getDonationListFromBackend(){
+    try{
+        const result = await getPendingDonationsForAllRequestOfUser();
+        if(result.status === "success"){
+            donationListForRequestLength = result.data.length;
+            if(result.data.length == 0){
+                showNoDonationListForRequestMessage();
+            }
+            else{
+                addDonationListForRequestToTableDOM(result.data)
+                addDonationListForRequestToCardDOM(result.data)
+            }
+            
+        }
+        else if(result.status === "error"){
+            if(result.errorCode === 401 || result.errorCode === 403 || result.errorCode === 404){
+                loginAgain();
+            }
+            else{
+                showErrorToast('Please refresh the page');
+                console.log(result.data);
+            }
+        }
+    }
+    catch(error){
+        showErrorToast('Please refresh the page');
+        console.log(error);
+    }
+}
+
+function showNoDonationListForRequestMessage(){
+    const tableContainer = document.getElementById('approve-donation-table');
+    tableContainer.style.display = 'none';
+    const cardContainer = document.getElementsByClassName('approve-donation-card-container')[0];
+    cardContainer.style.display = 'none';
+    const noDonationMessage = document.getElementById('approve-donation-error-container');
+    noDonationMessage.style.display = 'block';
+}
+
+function addDonationListForRequestToTableDOM(donationListForRequestList){
+    const tableBody = document.getElementById('approve-donation-table-body');
+    tableBody.innerHTML = ''; 
+    donationListForRequestList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-request-id', item.requestId);
+        row.setAttribute('data-donation-id', item.donationId);
+        row.innerHTML = `
+            <td>${item.donorName}</td>
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.unitsDonated}</td>
+            <td>${new Date(item.donateDateTime).toLocaleString()}</td>
+            <td>
+                <div>
+                    <button class="approve-donation-button"  data-request-id = "${item.requestId}" data-donation-id="${item.donationId}">Approve</button>
+                    <button class="reject-donation-button"  data-request-id = "${item.requestId}"  data-donation-id="${item.donationId}">Reject</button>
+                </div>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+    document.querySelectorAll('.approve-donation-button').forEach(button => {
+        button.addEventListener('click', approveDonationToBackend);
+    });
+
+    document.querySelectorAll('.reject-donation-button').forEach(button => {
+        button.addEventListener('click', (event)=>{
+           currentRequestId = event.target.getAttribute('data-request-id')
+           currentDonationId =  event.target.getAttribute('data-donation-id');
+           openRejectDialogBox();
+        })
+        
+    });
+
+}
+
+function  addDonationListForRequestToCardDOM(donationList){
+    const cardContainer = document.getElementsByClassName('approve-donation-card-container')[0];
+    cardContainer.innerHTML = ''; 
+    donationList.forEach(item => {
+        console.log(item); 
+        const card = document.createElement('div');
+        card.classList.add('donateRequest-card');
+        card.setAttribute('data-request-id', item.requestId);
+        card.setAttribute('data-donation-id', item.donationId);
+        card.innerHTML = `
+            <div class="approveDonation-card-item-container">
+                <div>Donor Name :</div>
+                <div>${item.donorName}</div>
+            </div>
+            <div class="approveDonation-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateRequest-card-item-container">
+                <div>Rh Factor:</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateRequest-card-item-container">
+                <div>Units Donated :</div>
+                <div>${item.unitsDonated}</div>
+            </div>
+            <div class="donateRequest-card-item-container">
+                <div>Donate DateTime :</div>
+                <div>${new Date(item.donateDateTime).toLocaleString()}</div>
+            </div>
+            <div class="approve-donation-btn-container">
+                <button class="approve-donation-button" data-request-id = "${item.requestId}"    data-donation-id="${item.donationId}">Accept</button>
+                <button class="reject-donation-button"  data-request-id = "${item.requestId}" data-donation-id="${item.donationId}">Reject</button>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+    });
+    document.querySelectorAll('.approve-donation-button').forEach(button => {
+        button.addEventListener('click', approveDonationToBackend);
+    });
+    document.querySelectorAll('.reject-donation-button').forEach(button => {
+        button.addEventListener('click', (event)=>{
+           currentRequestId = event.target.getAttribute('data-request-id')
+           currentDonationId =  event.target.getAttribute('data-donation-id');
+           console.log(currentDonationId , currentRequestId);
+           openRejectDialogBox();
+        })
+    });
+}
+
+async function approveDonationToBackend(event){
+    const donationId = event.target.getAttribute('data-donation-id');
+    try{
+       const result = await approveDonation(donationId);
+       if(result.status === "success"){
+            showSuccessToast('Donation approved successfully');
+             const card = document.querySelector(`.donateRequest-card[data-donation-id="${donationId}"]`);
+             card.remove();
+             const row = document.querySelector(`tr[data-donation-id="${donationId}"]`);
+             row.remove();
+             donationListForRequestLength--;
+            if(donationListForRequestLength === 0){
+                showNoDonationListForRequestMessage();
+             }
+       }
+       else if(result.status === "error"){
+            if(result.errorCode === 401 || result.errorCode === 403){
+                loginAgain();
+            }
+            else{
+                showErrorToast('Error in approving the donation');
+                console.log(result.data);
+            }
+       }
+    }
+    catch(error){
+        showErrorToast('Error in approving the donation');
+        console.log(error);
+    }
 }
 
 function closeSideBar(){
@@ -358,7 +710,6 @@ async function makeRequest(){
     if(validRequestDetails(requestDetails)){
         const newRequestDetails = getNewRequestDetails(requestDetails);
         try{
-            console.log(newRequestDetails);
             const result = await addRequest(newRequestDetails);
             if(result.status === 'success'){
                 showSuccessToast('Request added successfully');
@@ -400,6 +751,29 @@ function resetRequestForm(){
     document.getElementById('request-form-hospitalAddress').value = '';
     document.getElementById('request-form-doctorName').value = '';
     document.getElementById('request-form-doctorNumber').value = '';
+    makeInputBoxBlackColor('request-form-patientName');
+    makeInputBoxBlackColor('request-form-bloodType');
+    makeInputBoxBlackColor('request-form-rhFactor');
+    makeInputBoxBlackColor('request-form-unitsNeeded');
+    makeInputBoxBlackColor('request-form-urgency');
+    makeInputBoxBlackColor('request-form-contactNumber');
+    makeInputBoxBlackColor('request-form-description');
+    makeInputBoxBlackColor('request-form-hospitalName');
+    makeInputBoxBlackColor('request-form-hospitalAddress');
+    makeInputBoxBlackColor('request-form-doctorName');
+    makeInputBoxBlackColor('request-form-doctorNumber');
+    makeErrorContainerDisplayNone('patientName-error');
+    makeErrorContainerDisplayNone('bloodType-error');
+    makeErrorContainerDisplayNone('rhFactor-error');
+    makeErrorContainerDisplayNone('unitsNeeded-error');
+    makeErrorContainerDisplayNone('urgency-error');
+    makeErrorContainerDisplayNone('contactNumber-error');
+    makeErrorContainerDisplayNone('description-error');
+    makeErrorContainerDisplayNone('hospitalName-error');
+    makeErrorContainerDisplayNone('hospitalAddress-error');
+    makeErrorContainerDisplayNone('doctorName-error');
+    makeErrorContainerDisplayNone('doctorNumber-error');
+
 }
 
 function getNewRequestDetails(requestDetails){
@@ -611,16 +985,160 @@ function validateDoctorNumber(doctorNumber){
     }
 }
 
+document.getElementById('dialogForm-donate-btn').addEventListener('click', donateCenter);
+
+async function donateCenter(){
+    let donateDetails = getDonationDetails();
+    if(validDonateDetails(donateDetails)){
+        closeDonateToCenterDialogForm();
+        let newDonateDetails = getNewDonateToCenterDetails(donateDetails);
+        try{
+            const result = await addDonationToCenter(newDonateDetails);
+            if(result.status === 'success'){
+                showSuccessToast("Donation added successfully")
+            }
+            else if(result.status === 'error'){
+                if(result.errorCode === 401 || result.errorCode === 403){
+                   loginAgain();
+                }
+                else{
+                    showErrorToast('Donation Failed. Please try again');
+                }
+            }
+
+        }
+        catch(error){
+            showErrorToast('Donation Failed.Please try again');
+        }
+    }
+}
+
+function getNewDonateToCenterDetails(donateDetails){
+    let newDonateDetails = {
+        userId : sessionStorage.getItem('userId'),
+        centerId : currentDonationCenterId,
+        bloodType : donateDetails.bloodType,
+        rhFactor : donateDetails.rhFactor,
+        unitsDonated : donateDetails.unitsToDonate.toString(),
+        donateDateTime : donateDetails.dateTime,
+    }
+    return newDonateDetails;
+}
+
+function getDonationDetails(){
+    let donationDetails = {
+        bloodType : document.getElementById('donate-bloodType').value,
+        rhFactor : document.getElementById('donate-rhFactor').value,
+        unitsToDonate : document.getElementById('donate-unitsToDonate').value,
+        dateTime : document.getElementById('donate-dateTime').value,
+    }
+    return donationDetails;
+}
+
+function validDonateDetails(donateDetails){
+    const isValidBloodType = validateDonateToCenterBloodType(donateDetails.bloodType);
+    const isValidRhFactor = validateDonateToCenterRhFactor(donateDetails.rhFactor);
+    const isValidUnitsToDonate = validateDonateToCenterUnitsToDonate(donateDetails.unitsToDonate);
+    const isValidDateTime = validateDonateToCenterDateTime(donateDetails.dateTime);
+
+    return (isValidBloodType && isValidRhFactor && isValidUnitsToDonate && isValidDateTime);
+}
+
+function validateDonateToCenterBloodType(bloodType){
+    if(bloodType === undefined || bloodType.length === 0){
+        makeInputBoxRedColor('donate-bloodType');
+        showErrorMessage('Please select the blood type' , 'donate-bloodType-error');
+        return false;
+    }
+    else{
+        makeInputBoxBlackColor('donate-bloodType'); 
+        makeErrorContainerDisplayNone('donate-bloodType-error');
+        return true;
+    }
+}
+
+function validateDonateToCenterRhFactor(rhFactor){
+    if(rhFactor === undefined || rhFactor.length === 0){
+        makeInputBoxRedColor('donate-rhFactor');
+        showErrorMessage('Please select the rh factor' , 'donate-rhFactor-error');
+        return false;
+    }
+    else{
+        makeInputBoxBlackColor('donate-rhFactor'); 
+        makeErrorContainerDisplayNone('donate-rhFactor-error');
+        return true;
+    }
+}
+
+
+function validateDonateToCenterUnitsToDonate(unitsToDonate){
+    if(unitsToDonate === undefined || unitsToDonate.length === 0){
+        makeInputBoxRedColor('donate-unitsToDonate');
+        showErrorMessage('Please enter the units' , 'donate-unitsToDonate-error');
+        return false;
+    }
+    else{
+        makeInputBoxBlackColor('donate-unitsToDonate'); 
+        makeErrorContainerDisplayNone('donate-unitsToDonate-error');
+        return true;
+    }
+}
+
+function validateDonateToCenterDateTime(dateTime){
+    if(dateTime === undefined || dateTime.length === 0){
+        makeInputBoxRedColor('donate-dateTime');
+        showErrorMessage('Please enter the date and time' , 'donate-dateTime-error');
+        return false;
+    }
+    else{
+        makeInputBoxBlackColor('donate-dateTime'); 
+        makeErrorContainerDisplayNone('donate-dateTime-error');
+        return true;
+    }
+}
+    
+
+
+document.getElementById("close-dialog-btn").addEventListener("click", closeDonateToCenterDialogForm);
 
 
 function closeDonateToCenterDialogForm(){
+    resetDonateToCenterForm();
     var modal = document.getElementById("donate-modal");
- modal.style.display = "none";
+    modal.style.display = "none";
+}
+
+function resetDonateToCenterForm(){
+    document.getElementById('donate-bloodType').value = '';
+    document.getElementById('donate-rhFactor').value = '';
+    document.getElementById('donate-unitsToDonate').value = '';
+    document.getElementById('donate-dateTime').value = '';
+    makeInputBoxBlackColor('donate-bloodType');
+    makeInputBoxBlackColor('donate-rhFactor');
+    makeInputBoxBlackColor('donate-unitsToDonate');
+    makeInputBoxBlackColor('donate-dateTime');
+    makeErrorContainerDisplayNone('donate-bloodType-error');
+    makeErrorContainerDisplayNone('donate-rhFactor-error');
+    makeErrorContainerDisplayNone('donate-unitsToDonate-error');
+    makeErrorContainerDisplayNone('donate-dateTime-error');
 }
 
 function openDonateToCenterDialogForm(){
     var modal = document.getElementById("donate-modal");
     modal.style.display = "flex";
+    setDateTimePicker();
+}
+
+function setDateTimePicker(){
+    const dateTimeInput = document.getElementById('donate-dateTime');
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    dateTimeInput.min = minDateTime;
 }
 
 function openRejectDialogBox(){
@@ -628,7 +1146,10 @@ function openRejectDialogBox(){
     modal.style.display = "flex";
 }
 
+document.getElementById('approvalDialogForm-close-btn').addEventListener('click' , closeRejectDialogBox);
+
 function closeRejectDialogBox(){
+    document.getElementById('donation-reject-reason').value = "";
     var modal = document.getElementById("approve-donation-modal");
     modal.style.display = "none";
 }
@@ -689,7 +1210,102 @@ function getScheduleDonationHistory(){
     const scheduleTable = document.getElementById("donation-history-schedule-table");
     scheduleTable.style.display = 'block'
     const scheduleCardContainer = document.getElementById("donation-history-schedule-card-container");
-    scheduleCardContainer.style.display = 'flex'
+    scheduleCardContainer.style.display = 'flex';
+    getScheduledDonationHistoryData();
+}
+
+async function getScheduledDonationHistoryData(){
+    if(!donationHistory.scheduledDonationHistory){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(donationHistory.scheduledDonationHistory.length == 0){
+        showMessageForNoScheduledDonationHistory();
+    }
+    else{
+        let scheduledDonationHistoryList = donationHistory.scheduledDonationHistory;
+        makeMessageForNoScheduledDonationHistoryToDisplayNone();
+        addScheduledDonationHistoryToTableDOM(scheduledDonationHistoryList);
+        addScheduledDonationHistoryToCardDOM(scheduledDonationHistoryList);
+    }
+}
+
+function makeMessageForNoScheduledDonationHistoryToDisplayNone(){
+   const messageContainer = document.getElementById('no-schedule-donation-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('donation-history-schedule-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('donation-history-schedule-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-donation-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+
+}
+
+function showMessageForNoScheduledDonationHistory(){
+    const cardContainer = document.getElementById('donation-history-schedule-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('donation-history-schedule-table');
+    tableContainer.style.display = 'none';
+    const scheduledmessageContainer = document.getElementById('no-schedule-donation-history-message');
+    scheduledmessageContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-donation-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+}
+
+function addScheduledDonationHistoryToTableDOM(scheduledDonationHistoryList){
+    const tableBody = document.getElementById('schedule-donation-history-table-body');
+    tableBody.innerHTML = ''; 
+    scheduledDonationHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-donation-id', item.donationId);
+        row.innerHTML = `
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.donateUnits}</td>
+            <td>${item.donationType}</td>
+            <td>${new Date(item.donationDateTime).toLocaleString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+}
+
+function addScheduledDonationHistoryToCardDOM(scheduledDonationHistoryList){
+    const cardContainer = document.getElementById('donation-history-schedule-card-container');
+    cardContainer.innerHTML = ''; 
+    scheduledDonationHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('donate-history-card');
+        card.setAttribute('data-donation-id', item.donationId);
+        card.innerHTML = `
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donated Units :</div>
+                <div>${item.donateUnits}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation Type :</div>
+                <div>${item.donationType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation DateTime :</div>
+                <div>${new Date(item.donationDateTime).toLocaleString()}</div>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+    });
 }
 
 function getScheduleRequestHistory(){
@@ -701,6 +1317,124 @@ function getScheduleRequestHistory(){
     scheduleTable.style.display = 'block'
     const scheduleCardContainer = document.getElementById("request-history-schedule-card-container");
     scheduleCardContainer.style.display = 'flex'
+    getScheduleRequestHistoryData();
+}
+
+function getScheduleRequestHistoryData(){
+    if(!requestHistory.scheduledRequestHistoryList){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(requestHistory.scheduledRequestHistoryList.length == 0){
+        showMessageForNoScheduleRequestHistory();
+    }
+    else{
+        let scheduleRequestHistoryList = requestHistory.scheduledRequestHistoryList;
+       makeMessageForNoScheduleRequestHistoryToDisplayNone();
+        addScheduleRequestHistoryToTableDOM(scheduleRequestHistoryList);
+        addScheduleRequestHistoryToCardDOM(scheduleRequestHistoryList);
+    }
+}
+
+function showMessageForNoScheduleRequestHistory(){
+    const cardContainer = document.getElementById('request-history-schedule-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('request-history-schedule-table');
+    tableContainer.style.display = 'none';
+    const schedulemessageContainer = document.getElementById('no-schedule-request-history-message');
+    schedulemessageContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-request-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+}
+
+function makeMessageForNoScheduleRequestHistoryToDisplayNone(){
+    const messageContainer = document.getElementById('no-schedule-request-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('request-history-schedule-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('request-history-schedule-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-request-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+}
+
+function addScheduleRequestHistoryToTableDOM(scheduleRequestHistoryList){
+    const tableBody = document.getElementById('schedule-request-history-table-body');
+    tableBody.innerHTML = ''; 
+    scheduleRequestHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-request-id', item.requestId);
+        row.innerHTML = `
+            <td>${item.patientName}</td>
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.unitsNeeded}</td>
+            <td>${item.contactNumber}</td>
+            <td>${item.hospitalName}</td>
+            <td>${item.hospitalAddress}</td>
+            <td>${item.doctorName}</td>
+            <td>${item.doctorContactNumber}</td>
+            <td>${new Date(item.requestDateTime).toLocaleString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function addScheduleRequestHistoryToCardDOM(scheduleRequestHistoryList){
+    const cardContainer = document.getElementById('request-history-schedule-card-container');
+    cardContainer.innerHTML = ''; 
+    scheduleRequestHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('donate-history-card');
+        card.setAttribute('data-request-id', item.requestId);
+        card.innerHTML = `
+            <div class="donateHistory-card-item-container">
+                <div>Patient Name :</div>
+                <div>${item.patientName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Units Needed :</div>
+                <div>${item.unitsNeeded}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Contact Number :</div>
+                <div>${item.contactNumber}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Name :</div>
+                <div>${item.hospitalName}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Address :</div>
+                <div>${item.hospitalAddress}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Doctor Name :</div>
+                <div>${item.doctorName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Doctor Contact Number :</div>
+                <div>${item.doctorContactNumber}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Request DateTime :</div>
+                <div>${new Date(item.requestDateTime).toLocaleString()}</div>
+            </div>
+            `
+        cardContainer.appendChild(card);
+    });
 }
 function getApprovedDonationHistory(){
     makeAllDonateHistoryCardBackGroundWhite();
@@ -711,7 +1445,101 @@ function getApprovedDonationHistory(){
     approvedTable.style.display = 'block'
     const approvedCardContainer = document.getElementById("donation-history-approved-card-container");
     approvedCardContainer.style.display = 'flex'
+    getApprovedDonationHistoryData();
 }
+
+function getApprovedDonationHistoryData(){
+    if(!donationHistory.approvedDonationHistory){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(donationHistory.approvedDonationHistory.length == 0){
+        showMessageForNoApprovedDonationHistory();
+    }
+    else{
+        let approvedDonationHistoryList = donationHistory.approvedDonationHistory;
+        makeMessageForNoApprovedDonationHistoryToDisplayNone();
+        addApprovedDonationHistoryToTableDOM(approvedDonationHistoryList);
+        addApprovedDonationHistoryToCardDOM(approvedDonationHistoryList);
+    }
+}
+
+function  showMessageForNoApprovedDonationHistory(){
+    const cardContainer = document.getElementById('donation-history-approved-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('donation-history-approved-table');
+    tableContainer.style.display = 'none';
+    const scheduledmessageContainer = document.getElementById('no-schedule-donation-history-message');
+    scheduledmessageContainer.style.display = 'none';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'block';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-donation-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+}
+
+function  makeMessageForNoApprovedDonationHistoryToDisplayNone(){
+    const messageContainer = document.getElementById('no-approved-donation-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('donation-history-approved-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('donation-history-approved-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-schedule-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejecteddonationHistoryContainer = document.getElementById('no-rejected-donation-history-message');
+    rejecteddonationHistoryContainer.style.display = 'none';
+}
+
+function  addApprovedDonationHistoryToTableDOM(approvedDonationHistoryList){
+    const tableBody = document.getElementById('approved-donation-history-table-body');
+    tableBody.innerHTML = ''; 
+    approvedDonationHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-donation-id', item.donationId);
+        row.innerHTML = `
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.donatedUnits}</td>
+            <td>${item.donationType}</td>
+            <td>${new Date(item.donatedDateTime).toLocaleString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function  addApprovedDonationHistoryToCardDOM(approvedDonationHistoryList){
+    const cardContainer = document.getElementById('donation-history-approved-card-container');
+    cardContainer.innerHTML = ''; 
+    approvedDonationHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('donate-history-card');
+        card.setAttribute('data-donation-id', item.donationId);
+        card.innerHTML = `
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donated Units :</div>
+                <div>${item.donatedUnits}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation Type :</div>
+                <div>${item.donationType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation DateTime :</div>
+                <div>${new Date(item.donatedDateTime).toLocaleString()}</div>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+    });
+}
+
 
 function getApprovedRequestHistory(){
     makeAllRequestHistoryCardBackGroundWhite();
@@ -722,6 +1550,124 @@ function getApprovedRequestHistory(){
     approvedTable.style.display = 'block'
     const approvedCardContainer = document.getElementById("request-history-approved-card-container");
     approvedCardContainer.style.display = 'flex'
+    getApprovedRequestHistoryData();
+}
+
+function getApprovedRequestHistoryData(){
+     if(!requestHistory.approvedRequestHistoryList){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(requestHistory.approvedRequestHistoryList.length == 0){
+        showMessageForNoApprovedRequestHistory();
+    }
+    else{
+        let approvedRequestHistoryList = requestHistory.approvedRequestHistoryList;
+        makeMessageForNoApprovedRequestHistoryToDisplayNone();
+        addApprovedRequestHistoryToTableDOM(approvedRequestHistoryList);
+        addApprovedRequestHistoryToCardDOM(approvedRequestHistoryList);
+    }
+}
+
+function showMessageForNoApprovedRequestHistory(){
+    const cardContainer = document.getElementById('request-history-approved-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('request-history-approved-table');
+    tableContainer.style.display = 'none';
+    const scheduledmessageContainer = document.getElementById('no-schedule-request-history-message');
+    scheduledmessageContainer.style.display = 'none';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'block';
+    const rejectedrequestHistoryContainer = document.getElementById('no-rejected-request-history-message');
+    rejectedrequestHistoryContainer.style.display = 'none';
+}
+
+function makeMessageForNoApprovedRequestHistoryToDisplayNone(){
+    const messageContainer = document.getElementById('no-approved-request-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('request-history-approved-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('request-history-approved-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-schedule-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const rejectedrequestHistoryContainer = document.getElementById('no-rejected-request-history-message');
+    rejectedrequestHistoryContainer.style.display = 'none';
+}
+
+function  addApprovedRequestHistoryToTableDOM(approvedRequestHistoryList){
+    const tableBody = document.getElementById('approved-request-history-table-body');
+    tableBody.innerHTML = ''; 
+    approvedRequestHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-request-id', item.requestId);
+        row.innerHTML = `
+            <td>${item.patientName}</td>
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.unitsNeeded}</td>
+            <td>${item.unitsCollected}</td>
+            <td>${item.contactNumber}</td>
+            <td>${item.hospitalName}</td>
+            <td>${item.hospitalAddress}</td>
+            <td>${item.doctorName}</td>
+            <td>${new Date(item.requestDateTime).toLocaleString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function addApprovedRequestHistoryToCardDOM(approvedRequestHistoryList){
+    const cardContainer = document.getElementById('request-history-approved-card-container');
+    cardContainer.innerHTML = ''; 
+    approvedRequestHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('request-history-card');
+        card.setAttribute('data-request-id', item.requestId);
+        card.innerHTML = `
+           <div class="donateHistory-card-item-container">
+                <div>Patient Name :</div>
+                <div>${item.patientName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Units Needed :</div>
+                <div>${item.unitsNeeded}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Units Collected :</div>
+                 <div>${item.unitsCollected}</div>
+             </div>               
+            <div class="donateHistory-card-item-container">
+                <div>Contact Number :</div>
+                <div>${item.contactNumber}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Name :</div>
+                <div>${item.hospitalName}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Address :</div>
+                <div>${item.hospitalAddress}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Doctor Name :</div>
+                <div>${item.doctorName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Request DateTime :</div>
+                <div>${new Date(item.requestDateTime).toLocaleString()}</div>
+            </div>
+            `
+            cardContainer.appendChild(card);
+    });
 }
 
 function getRejectedDonationHistory(){
@@ -733,8 +1679,105 @@ function getRejectedDonationHistory(){
     rejectedTable.style.display = 'block'
     const rejectedCardContainer = document.getElementById("donation-history-rejected-card-container");
     rejectedCardContainer.style.display = 'flex'
+    getRejectedDonationHistoryData();
 }
 
+function getRejectedDonationHistoryData(){
+    if(!donationHistory.rejectedDonationHistory){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(donationHistory.rejectedDonationHistory.length == 0){
+        showMessageForNoRejectedDonationHistory();
+    }
+    else{
+        let rejectedDonationHistoryList = donationHistory.rejectedDonationHistory;
+        makeMessageForNoRejectedDonationHistoryToDisplayNone();
+        addRejectedDonationHistoryToTableDOM(rejectedDonationHistoryList);
+        addRejectedDonationHistoryToCardDOM(rejectedDonationHistoryList);
+    }
+}
+
+function  showMessageForNoRejectedDonationHistory(){
+    const cardContainer = document.getElementById('donation-history-rejected-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('donation-history-rejected-table');
+    tableContainer.style.display = 'none';
+    const scheduledmessageContainer = document.getElementById('no-schedule-donation-history-message');
+    scheduledmessageContainer.style.display = 'none';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const approveddonationHistoryContainer = document.getElementById('no-rejected-donation-history-message');
+    approveddonationHistoryContainer.style.display = 'block';
+}
+
+function  makeMessageForNoRejectedDonationHistoryToDisplayNone(){
+    const messageContainer = document.getElementById('no-rejected-donation-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('donation-history-rejected-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('donation-history-rejected-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-schedule-donation-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const approveddonationHistoryContainer = document.getElementById('no-approved-donation-history-message');
+    approveddonationHistoryContainer.style.display = 'none';
+}
+
+function   addRejectedDonationHistoryToTableDOM(rejectedDonationHistoryList){
+    const tableBody = document.getElementById('rejected-donation-history-table-body');
+    tableBody.innerHTML = ''; 
+    rejectedDonationHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-donation-id', item.donationId);
+        row.innerHTML = `
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.donateUnits}</td>
+            <td>${item.donationType}</td>
+            <td>${new Date(item.donateDateTime).toLocaleString()}</td>
+            <td>${item.rejectReason}</td>
+        `;
+        tableBody.appendChild(row);
+    }); 
+}
+
+function addRejectedDonationHistoryToCardDOM(rejectedDonationHistoryList){
+    const cardContainer = document.getElementById('request-history-rejected-card-container');
+    cardContainer.innerHTML = ''; 
+    rejectedDonationHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('donate-history-card');
+        card.setAttribute('data-donation-id', item.donationId);
+        card.innerHTML = `
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donated Units :</div>
+                <div>${item.donateUnits}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation Type :</div>
+                <div>${item.donationType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Donation DateTime :</div>
+                <div>${new Date(item.donateDateTime).toLocaleString()}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Reject Reason :</div>
+                <div>${item.rejectReason}</div>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+    });
+}
 
 function getRejectedRequestHistory(){
     makeAllRequestHistoryCardBackGroundWhite();
@@ -745,6 +1788,130 @@ function getRejectedRequestHistory(){
     rejectedTable.style.display = 'block'
     const rejectedCardContainer = document.getElementById("request-history-rejected-card-container");
     rejectedCardContainer.style.display = 'flex'
+    getRejectedRequestHistoryData();
+}
+
+function getRejectedRequestHistoryData(){
+    if(!requestHistory.rejectedRequestHistoryList){
+        showErrorToast("Please Refresh the page");
+        return;
+    }
+    if(requestHistory.rejectedRequestHistoryList.length == 0){
+        showMessageForNoRejectedRequestHistory();
+    }
+    else{
+        let rejectedRequestHistoryList = requestHistory.rejectedRequestHistoryList;
+        makeMessageForNoRejectedRequestHistoryToDisplayNone();
+        addRejectedRequestHistoryToTableDOM(rejectedRequestHistoryList);
+        addRejectedRequestHistoryToCardDOM(rejectedRequestHistoryList);
+    }
+}
+
+function  addRejectedRequestHistoryToTableDOM(rejectedRequestHistoryList){
+    const tableBody = document.getElementById('rejected-request-history-table-body');
+    tableBody.innerHTML = ''; 
+    rejectedRequestHistoryList.forEach(item => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-request-id', item.requestId);
+        row.innerHTML = `
+            <td>${item.patientName}</td>
+            <td>${item.bloodType}</td>
+            <td>${item.rhFactor}</td>
+            <td>${item.unitsNeeded}</td>
+            <td>${item.contactNumber}</td>
+            <td>${item.hospitalName}</td>
+            <td>${item.hospitalAddress}</td>
+            <td>${item.doctorName}</td>
+            <td>${item.doctorContactNumber}</td>
+            <td>${new Date(item.requestDateTime).toLocaleString()}</td>
+            <td>${item.rejectReason}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function  addRejectedRequestHistoryToCardDOM(rejectedRequestHistoryList){
+    const cardContainer = document.getElementById('request-history-rejected-card-container');
+    cardContainer.innerHTML = ''; 
+    rejectedRequestHistoryList.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('request-history-card');
+        card.setAttribute('data-request-id', item.requestId);
+        card.innerHTML = `
+         <div class="donateHistory-card-item-container">
+                <div>Patient Name :</div>
+                <div>${item.patientName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Blood Type :</div>
+                <div>${item.bloodType}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Rh Factor :</div>
+                <div>${item.rhFactor}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Units Needed :</div>
+                <div>${item.unitsNeeded}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Contact Number :</div>
+                <div>${item.contactNumber}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Name :</div>
+                <div>${item.hospitalName}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Hospital Address :</div>
+                <div>${item.hospitalAddress}</div>
+             </div>
+            <div class="donateHistory-card-item-container">
+                <div>Doctor Name :</div>
+                <div>${item.doctorName}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                 <div>Doctor Contact Number :</div>
+                <div>${item.doctorContactNumber}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Request DateTime :</div>
+                <div>${new Date(item.requestDateTime).toLocaleString()}</div>
+            </div>
+            <div class="donateHistory-card-item-container">
+                <div>Reject Reason :</div>
+                <div>${item.rejectReason}</div>
+            </div>
+            `;
+        cardContainer.appendChild(card);
+    });
+           
+}
+
+function  showMessageForNoRejectedRequestHistory(){
+    const cardContainer = document.getElementById('request-history-rejected-card-container');
+    cardContainer.style.display = 'none';
+    const tableContainer = document.getElementById('request-history-rejected-table');
+    tableContainer.style.display = 'none';
+    const scheduledmessageContainer = document.getElementById('no-schedule-request-history-message');
+    scheduledmessageContainer.style.display = 'none';
+    const scheduleddonationHistoryContainer = document.getElementById('no-approved-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const approveddonationHistoryContainer = document.getElementById('no-rejected-request-history-message');
+    approveddonationHistoryContainer.style.display = 'block';
+}
+
+function makeMessageForNoRejectedRequestHistoryToDisplayNone(){
+    const messageContainer = document.getElementById('no-rejected-request-history-message');
+    messageContainer.style.display = 'none';
+    const cardContainer = document.getElementById('request-history-rejected-card-container');
+    cardContainer.style.display = 'flex';
+    const tableContainer = document.getElementById('request-history-rejected-table');
+    tableContainer.style.display = 'block';
+    const scheduleddonationHistoryContainer = document.getElementById('no-schedule-request-history-message');
+    scheduleddonationHistoryContainer.style.display = 'none';
+    const approveddonationHistoryContainer = document.getElementById('no-approved-request-history-message');
+    approveddonationHistoryContainer.style.display = 'none';
 }
 
 function makeAllSideBarItemsColorLightWhite(){
@@ -794,3 +1961,90 @@ function makeAllContentContainerToDisplayNone(){
     const approveDonationContainer = document.getElementById("approve-donation-container");
     approveDonationContainer.style.display = "none";
 }
+
+async function rejectReason(){
+    const rejectReasonInput = document.getElementById('donation-reject-reason');
+    const rejectReason = rejectReasonInput.value;
+    
+    if(validateRejectReason(rejectReason)){
+       let rejectDetails = {
+        donationId : currentDonationId,
+        requestId : currentRequestId,
+        rejectReason : rejectReason
+       }
+       try{
+            const result = await rejectDonation(rejectDetails);
+            if(result.status == 'success'){
+                showSuccessToast("Donation rejected successfully");
+                const card = document.querySelector(`.donateRequest-card[data-donation-id="${rejectDetails.donationId}"]`);
+                card.remove();
+                const row = document.querySelector(`tr[data-donation-id="${rejectDetails.donationId}"]`);
+                row.remove();
+                donationListForRequestLength--;
+                closeRejectDialogBox();
+                if(donationListForRequestLength == 0){
+                    showMessageForNoScheduleRequestHistory();
+                }
+            }
+            else if(result.status == 'error'){
+                if(result.errorCode == 401 || result.errorCode == 403){
+                    loginAgain();
+                }
+                else{
+                    showErrorToast("Failed to reject donation.please try again");
+                    closeRejectDialogBox();
+                }
+            }
+        }
+        catch(error){
+            showErrorToast("Failed to reject donation. please try again");
+            closeRejectDialogBox();
+        }
+    }
+}
+
+function validateRejectReason(rejectReason){
+    if(rejectReason == undefined || rejectReason.length == 0){
+        makeInputBoxRedColor('donation-reject-reason');
+        showErrorMessage('Please enter the reason','donation-reject-reason-error');
+        return false;
+    }else{
+        makeInputBoxBlackColor('donation-reject-reason');
+        makeErrorContainerDisplayNone('donation-reject-reason-error');
+        return true;
+    }
+    
+}
+
+document.getElementById("schedule-donation-history-card").addEventListener("click", getScheduleDonationHistory);
+document.getElementById("approved-donation-history-card").addEventListener("click", getApprovedDonationHistory);
+document.getElementById("rejected-donation-history-card").addEventListener("click", getRejectedDonationHistory);
+
+
+document.getElementById('schedule-request-history-card').addEventListener('click',getScheduleRequestHistory);
+document.getElementById('approved-request-history-card').addEventListener('click',getApprovedRequestHistory);
+document.getElementById('rejected-request-history-card').addEventListener('click',getRejectedRequestHistory);
+
+document.getElementById('donation-reject-reason-btn').addEventListener('click', rejectReason);
+
+document.getElementById('logout-btn-1').addEventListener('click' ,()=>{
+    document.getElementById('logout-dialog').style.display = 'flex';
+})
+
+document.getElementById('logout-btn-2').addEventListener('click' ,()=>{
+    document.getElementById('logout-dialog').style.display = 'flex';
+})
+
+document.getElementById('yes-button').addEventListener('click', function() {
+    sessionStorage.clear();
+    window.location.href = 'login.html';
+});
+
+document.getElementById('no-button').addEventListener('click', function() {
+    document.getElementById('logout-dialog').style.display = 'none';
+});
+
+document.querySelector('.close-button').addEventListener('click', function() {
+    document.getElementById('logout-dialog').style.display = 'none';
+});
+

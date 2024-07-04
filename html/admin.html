@@ -10,7 +10,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <script src="../js/admin.js" defer></script>
+    <script src="../js/admin.js" defer type="module"></script>
+     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="container">
@@ -19,7 +24,6 @@
           <div
             class="menu-container-hamburger"
             id="hamburger"
-            onclick="showSideBar()"
           >
             &#9776;
           </div>
@@ -45,7 +49,6 @@
           <div
             class="sidebar-item-container"
             id="profile-sidebar-container-1"
-            onclick="showProfilePage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
@@ -57,7 +60,6 @@
           <div
             class="sidebar-item-container"
             id="activate-admin-sidebar-container-1"
-            onclick="showActivateAdminPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user-check"></i>
@@ -67,7 +69,6 @@
           <div
             class="sidebar-item-container"
             id="add-center-sidebar-container-1"
-            onclick="showAddCenterPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
@@ -77,7 +78,6 @@
           <div
             class="sidebar-item-container"
             id="approve-request-sidebar-container-1"
-            onclick="showApproveRequestPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
@@ -89,7 +89,6 @@
           <div
             class="sidebar-item-container"
             id="profile-sidebar-container-2"
-            onclick="showProfilePage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
@@ -101,7 +100,6 @@
           <div
             class="sidebar-item-container"
             id="activate-admin-sidebar-container-2"
-            onclick="showActivateAdminPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user-check"></i>
@@ -111,7 +109,6 @@
           <div
             class="sidebar-item-container"
             id="add-center-sidebar-container-2"
-            onclick="showAddCenterPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
@@ -121,7 +118,6 @@
           <div
             class="sidebar-item-container"
             id="approve-request-sidebar-container-2"
-            onclick="showApproveRequestPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
@@ -133,174 +129,34 @@
           <div id="profile-container">
             <div class="content-heading">Profile</div>
             <div class="profile-content-container">
-              <div class="profile-item-container">
-                <div class="label">Name :</div>
-                <div>Sakthi sasi velar</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Email :</div>
-                <div>sakthisasivelar@gmail.com</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Gender :</div>
-                <div>Male</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Age :</div>
-                <div>21</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Contact-number :</div>
-                <div>1234567890</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">State :</div>
-                <div>Tamil Nadu</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">City :</div>
-                <div>Coimbatore</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Address :</div>
-                <div>116A,ABC STREET CBE</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Postal Code :</div>
-                <div>641668</div>
-              </div>
             </div>
           </div>
           <div id="activate-admin-container">
             <div class="content-heading">Activate Admin</div>
             <div class="activate-admin-card-container">
-              <div class="activate-admin-card">
-                <div class="activate-admin-item-container">
-                  <div>Name :</div>
-                  <div>Sakthi sasi velar</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Email :</div>
-                  <div>sakthisasivelar@gmail.com</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Gender :</div>
-                  <div>Male</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Age :</div>
-                  <div>21</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Contact-number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>State :</div>
-                  <div>Tamil Nadu</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>City :</div>
-                  <div>Coimbatore</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Address :</div>
-                  <div>116A,ABC STREET CBE</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Postal Code :</div>
-                  <div>641668</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Role :</div>
-                  <div>Admin</div>
-                </div>
-                <div class="activate-btn-container">
-                  <button class="activate-admin-button">Activate</button>
-                </div>
-              </div>
-              <div class="activate-admin-card">
-                <div class="activate-admin-item-container">
-                  <div>Name :</div>
-                  <div>Sakthi sasi velar</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Email :</div>
-                  <div>sakthisasivelar@gmail.com</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Gender :</div>
-                  <div>Male</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Age :</div>
-                  <div>21</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Contact-number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>State :</div>
-                  <div>Tamil Nadu</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>City :</div>
-                  <div>Coimbatore</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Address :</div>
-                  <div>116A,ABC STREET CBE</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Postal Code :</div>
-                  <div>641668</div>
-                </div>
-                <div class="activate-admin-item-container">
-                  <div>Role :</div>
-                  <div>Admin</div>
-                </div>
-                <div class="activate-btn-container">
-                  <button class="activate-admin-button">Activate</button>
-                </div>
-              </div>
             </div>
             <div class="activate-admin-table-container">
-              <table>
+              <table id="active-admin-table">
                 <thead>
                   <tr>
                     <th>Name</th>
                     <th colspan="2">Email</th>
                     <th>Gender</th>
                     <th>Age</th>
-                    <th>Contact-number</th>
+                    <th colspan="2">Contact-number</th>
                     <th>State</th>
                     <th>City</th>
                     <th>Address</th>
                     <th>Postal Code</th>
-                    <th>Role</th>
+                    <th colspan="2">Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Sakthi sasi velar</td>
-                    <td colspan="2">sakthi@gmail.com</td>
-                    <td>Male</td>
-                    <td>21</td>
-                    <td>1234567890</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>116A,ABC STREET CBE</td>
-                    <td>641668</td>
-                    <td>Admin</td>
-                    <td>
-                      <button class="activate-admin-button">Activate</button>
-                    </td>
-                  </tr>
+                <tbody id="activate-admin-table-body">
                 </tbody>
               </table>
             </div>
+            <div id="active-admin-message" class="message-style">No Not Activated accounts Available!!!</div>
           </div>
           <div id="add-center-container">
             <div class="content-heading">Add Center</div>
@@ -313,87 +169,85 @@
                   <div class="add-center-input-left-container">
                     <div class="add-center-input-label-container">
                       <div>Center Name :</div>
-                      <input type="text" />
-                      <div>Error</div>
+                      <input type="text" id="add-center-name"/>
+                      <div class="error-container" id="add-center-name-error"></div>
                     </div>
                     <div class="add-center-input-label-container">
                       <div>State :</div>
-                      <select id="state">
+                      <select id="add-center-state">
                         <option value="" disabled selected>
                           Select your state
                         </option>
-                        <option value="AP">Andhra Pradesh</option>
-                        <option value="AR">Arunachal Pradesh</option>
-                        <option value="AS">Assam</option>
-                        <option value="BR">Bihar</option>
-                        <option value="CT">Chhattisgarh</option>
-                        <option value="GA">Goa</option>
-                        <option value="GJ">Gujarat</option>
-                        <option value="HR">Haryana</option>
-                        <option value="HP">Himachal Pradesh</option>
-                        <option value="JK">Jammu and Kashmir</option>
-                        <option value="JH">Jharkhand</option>
-                        <option value="KA">Karnataka</option>
-                        <option value="KL">Kerala</option>
-                        <option value="MP">Madhya Pradesh</option>
-                        <option value="MH">Maharashtra</option>
-                        <option value="MN">Manipur</option>
-                        <option value="ML">Meghalaya</option>
-                        <option value="MZ">Mizoram</option>
-                        <option value="NL">Nagaland</option>
-                        <option value="OR">Odisha</option>
-                        <option value="PB">Punjab</option>
-                        <option value="RJ">Rajasthan</option>
-                        <option value="SK">Sikkim</option>
-                        <option value="TN">Tamil Nadu</option>
-                        <option value="TG">Telangana</option>
-                        <option value="TR">Tripura</option>
-                        <option value="UP">Uttar Pradesh</option>
-                        <option value="UT">Uttarakhand</option>
-                        <option value="WB">West Bengal</option>
-                        <option value="AN">Andaman and Nicobar Islands</option>
-                        <option value="CH">Chandigarh</option>
-                        <option value="DH">
-                          Dadra and Nagar Haveli and Daman and Diu
-                        </option>
-                        <option value="LD">Lakshadweep</option>
-                        <option value="DL">Delhi</option>
-                        <option value="PY">Puducherry</option>
-                        <option value="LA">Ladakh</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Puducherry">Puducherry</option>
+                        <option value="Ladakh">Ladakh</option>
                       </select>
-                      <div>Error</div>
+                      <div class="error-container" id="add-center-state-error"></div>
                     </div>
                     <div class="add-center-input-label-container">
                       <div>City :</div>
-                      <input type="text" />
-                      <div>Error</div>
+                      <input type="text" id="add-center-city" />
+                      <div class="error-container" id="add-center-city-error"></div>
                     </div>
                     <div class="add-center-input-label-container">
                       <div>Address :</div>
-                      <textarea type="text"></textarea>
-                      <div>Error</div>
+                      <textarea type="text" id="add-center-address"></textarea>
+                      <div class="error-container" id="add-center-address-error"></div>
                     </div>
                   </div>
                   <div class="add-center-input-right-container">
                     <div class="add-center-input-label-container">
                       <div>Postal Code :</div>
-                      <input type="number" />
-                      <div>Error</div>
+                      <input type="number" id="add-center-postal-code" />
+                      <div class="error-container" id="add-center-postal-code-error"></div>
                     </div>
                     <div class="add-center-input-label-container">
                       <div>Contact Number :</div>
-                      <input type="number" />
-                      <div>Error</div>
+                      <input type="number" id="add-center-contact-number"/>
+                      <div class="error-container" id="add-center-contact-number-error"></div>
                     </div>
                     <div class="add-center-input-label-container">
                       <div>Operating Hours :</div>
-                      <input type="text" />
-                      <div>Error</div>
+                      <input type="text" id="add-center-operating-hours" />
+                      <div class="error-container" id="add-center-operating-hours-error"></div>
                     </div>
                   </div>
                 </div>
                 <div class="add-center-submit-btn-container">
-                  <button class="add-center-submit-btn">Submit</button>
+                  <div class="add-center-submit-btn-style" id="add-center-submit-btn">Submit</div>
                 </div>
               </div>
             </div>
@@ -401,89 +255,30 @@
           <div id="approve-request-container">
             <div class="content-heading">Approve Request</div>
             <div class="approve-request-card-container">
-                <div class="approve-request-card">
-                   <div class="approve-request-item-container">
-                      <div>Patient Name :</div>
-                      <div>Sakthi sasi velar</div>
-                   </div>
-                   <div class="approve-request-item-container">
-                      <div>Blood Type :</div>
-                      <div>O+</div>
-                   </div>
-                   <div class="approve-request-item-container">
-                      <div>Units Needed :</div>
-                      <div>20</div>
-                   </div>
-                   <div class="approve-request-item-container">
-                      <div>Contact-number :</div>
-                      <div>1234567890</div>
-                   </div>
-                   <div class="approve-request-item-container">
-                      <div>Description :</div>
-                      <div>descrpiton...</div>
-                   </div>
-                   <div class="approve-request-item-container">
-                      <div>Hospital Name :</div>
-                      <div>Abc hospital</div>
-                   </div>
-                    <div class="approve-request-item-container">
-                      <div>Doctor Name :</div>
-                      <div>Rohit</div>
-                   </div>
-                    <div class="approve-request-item-container">
-                      <div>Doctor Contact Number :</div>
-                      <div>6416681234</div>
-                   </div>
-                    <div class="approve-request-item-container">
-                      <div>Request DateTime :</div>
-                      <div>27-10-2012</div>
-                   </div>
-                    <div class="approve-request-btn-container">
-                      <button class="approve-request-button">Approve</button>
-                      <button class="reject-request-button" onclick="openRejectDialogBox()">Reject</button>
-                    </div>
-                </div>
             </div>
             <div class="approve-request-table-container">
-              <table>
+              <table id="approve-request-table">
                 <thead>
                   <tr>
                     <th>Patient Name</th>
                     <th>Blood Type</th>
+                    <th>Rh Factor</th>
                     <th>Units Needed</th>
                     <th>Contact-number</th>
                     <th>Description</th>
                     <th>Hospital Name</th>
                     <th>Doctor Name</th>
                     <th>Doctor Contact Number</th>
-                    <th>Request DateTime</th>
                     <th colspan="2">Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Sakthi sasi velar</td>
-                    <td>O+</td>
-                    <td>20</td>
-                    <td>1234567890</td>
-                    <td>descrpiton...</td>
-                    <td>Abc hospital</td>
-                    <td>Rohit</td>
-                    <td>6416681234</td>
-                    <td>27-10-2012</td>
-                    <td colspan="2">
-                        <div class="approve-request-btn-container">
-                           <button class="approve-request-button">Approve</button>
-                           <button class="reject-request-button" onclick="openRejectDialogBox()">Reject</button>
-                        </div>
-                    </td>
-                  </tr>
+                <tbody id="approve-request-table-body">
                 </tbody>
               </table>
             </div>
             <div id="approve-request-reject-modal" class="modal">
               <div class="approve-request-reject-form-container ">
-                <div class="close-btn" onclick="closeRejectDialogBox()">
+                <div class="close-btn" id="reject-form-close-btn">
                   &times;
                 </div>
                 <div class="approve-request-reject-form-inner-container">
@@ -491,13 +286,15 @@
                   <div>
                     <div class="reject-reason-container">
                       <div>Reject Reason :</div>
-                      <textarea class="reject-reason-input"></textarea>
+                      <textarea class="reject-reason-input" id="reject-request-input"></textarea>
+                      <div class="error-container" id="reject-request-input-error"></div>
                     </div>
                   </div>
-                  <div class="reject-dialog-submit-btn">Submit</div>
+                  <div class="reject-dialog-submit-btn" id="reject-request-submit-btn">Submit</div>
                 </div>
               </div>
             </div>
+            <div class="message-style" id="approve-request-message-container">No Request Available!!!</div>
           </div>
         </div>
       </div>

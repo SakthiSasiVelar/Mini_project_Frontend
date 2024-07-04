@@ -23,9 +23,10 @@ async function signUp(){
             const result = await addUserDetails(newUserDetails);
             if (result.status === 'success') {
                 showSuccessToast("Registeration successful")
+                clearSignUpForm();
                 setTimeout(() => {
                     window.location.href = 'login.html';
-                }, 2000); 
+                }, 800); 
             } else if (result.status === 'error') {
                 showErrorToast(result.message);
             }
@@ -33,6 +34,21 @@ async function signUp(){
             console.log(error.message);
         }
     }
+}
+
+function clearSignUpForm(){
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('dob').value = '';
+    document.getElementById('contact-number').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('postal-code').value = '';
+    document.getElementById('role').value = '';
+    document.getElementById('center-id').value = '';
+    document.getElementById('create-password').value = '';
+    document.getElementById('confirm-password').value = '';
 }
 
 function getNewUserDetailsForCenterAdmin(userDetails){
@@ -142,15 +158,11 @@ function validateInputFields(userDetails) {
     let isValidRoleField  = checkRoleField(userDetails.role);
     let  isValidCreatePasswordField = checkCreatePasswordField(userDetails.createPassword);
     let isValidConfirmPasswordField =  checkConfirmPasswordField(userDetails.createPassword, userDetails.confirmPassword);
+    let isValidCenterId = (userDetails.role === 'CenterAdmin') ? checkCenterIdField(userDetails.centerId) : true;
 
-    if(isValidNameField && isValidEmailField && isValidGenderField && isValidDobField && isValidContactNumberField && isValidStateField && isValidCityField && isValidAddressField && isValidPostalCodeField && isValidRoleField && isValidCreatePasswordField && isValidConfirmPasswordField){
-        if(userDetails.role === 'CenterAdmin'){
-           return checkCenterIdField(userDetails.centerId);
-        }
-        return true;
-    }
+    return isValidNameField && isValidEmailField && isValidGenderField && isValidDobField && isValidContactNumberField && isValidStateField && isValidCityField && isValidAddressField && isValidPostalCodeField && isValidRoleField && isValidCreatePasswordField && isValidConfirmPasswordField && isValidCenterId;
 
-    return false;
+
    
 }
 

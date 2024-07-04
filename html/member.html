@@ -31,11 +31,11 @@
           <div class="heading">BLOOD DONATE APP</div>
         </div>
         <div class="right-header-1">
-          <div class="logout-heading">Logout</div>
+          <div class="logout-heading" id="logout-btn-1">Logout</div>
           <i class="fa-solid fa-right-from-bracket fa-lg logout-icon"></i>
         </div>
-        <div class="right-header-2">
-          <div class="logout-heading">Logout</div>
+        <div class="right-header-2" >
+          <div class="logout-heading" id="logout-btn-2">Logout</div>
           <i class="fa-solid fa-right-from-bracket fa-sm logout-icon"></i>
         </div>
       </div>
@@ -139,8 +139,7 @@
           </div>
           <div id="donate-container-request">
             <div class="content-heading">Donate Blood To Request</div>
-            <div class="donateRequest-card-container">
-            </div>
+            <div class="donateRequest-card-container"></div>
             <div class="donateRequest-table-container">
               <table id="donateRequest-table">
                 <thead>
@@ -156,122 +155,18 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody id="request-table-body">
-                </tbody>
+                <tbody id="request-table-body"></tbody>
               </table>
             </div>
-             <div id="no-request-message" class="no-requests" >No requests available!!</div>
+            <div id="no-request-message" class="no-requests">
+              No requests available!!
+            </div>
           </div>
           <div id="donate-container-center">
             <div class="content-heading">Donate Blood to Center</div>
-            <div class="donateCenter-card-container">
-              <div class="donateCenter-card">
-                <div class="donateCenter-card-item-container">
-                  <div>Center Name :</div>
-                  <div>Center 1</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>State :</div>
-                  <div>Tamil Nadu</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>City :</div>
-                  <div>Coimbatore</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Address :</div>
-                  <div>112,Abc nagar</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Postal Code :</div>
-                  <div>641669</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Contact Number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Operating hours:</div>
-                  <div>10:00 AM - 10:00 PM</div>
-                </div>
-                <div class="donate-btn-container">
-                  <div
-                    class="donate-btn"
-                    onclick="openDonateToCenterDialogForm()"
-                  >
-                    Donate
-                  </div>
-                </div>
-              </div>
-              <div class="donateCenter-card">
-                <div class="donateCenter-card-item-container">
-                  <div>Center Name :</div>
-                  <div>Center 1</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>State :</div>
-                  <div>Tamil Nadu</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>City :</div>
-                  <div>Coimbatore</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Address :</div>
-                  <div>112,Abc nagar</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Postal Code :</div>
-                  <div>641669</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Contact Number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Operating hours:</div>
-                  <div>10:00 AM - 10:00 PM</div>
-                </div>
-                <div class="donate-btn-container">
-                  <div class="donate-btn">Donate</div>
-                </div>
-              </div>
-              <div class="donateCenter-card">
-                <div class="donateCenter-card-item-container">
-                  <div>Center Name :</div>
-                  <div>Center 1</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>State :</div>
-                  <div>Tamil Nadu</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>City :</div>
-                  <div>Coimbatore</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Address :</div>
-                  <div>112,Abc nagar</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Postal Code :</div>
-                  <div>641669</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Contact Number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="donateCenter-card-item-container">
-                  <div>Operating hours:</div>
-                  <div>10:00 AM - 10:00 PM</div>
-                </div>
-                <div class="donate-btn-container">
-                  <div class="donate-btn">Donate</div>
-                </div>
-              </div>
-            </div>
+            <div class="donateCenter-card-container"></div>
             <div class="donateCenter-table-container">
-              <table>
+              <table id="donateCenter-table">
                 <thead>
                   <tr>
                     <th>Center Name</th>
@@ -284,233 +179,21 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Center 1</td>
-                    <td>Tamil Nadu</td>
-                    <td>Coimbatore</td>
-                    <td>641669</td>
-                    <td>112,ABC nagar cbe</td>
-                    <td>1234567890</td>
-                    <td>10:00 AM - 10:00 PM</td>
-                    <td>
-                      <div class="donate-btn-container">
-                        <div
-                          class="donate-btn"
-                          onclick="openDonateToCenterDialogForm()"
-                        >
-                          Donate
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="center-table-body"></tbody>
               </table>
+            </div>
+            <div id="no-donation-center-message" class="no-donation-centers">
+              No donation centers available!!
             </div>
             <div id="donate-modal" class="modal">
               <div class="donate-center-form-container">
-                <div
-                  class="close-btn"
-                  onclick="closeDonateToCenterDialogForm()"
-                >
-                  &times;
-                </div>
+                <div class="close-btn" id="close-dialog-btn">&times;</div>
                 <div class="donate-center-inner-container">
                   <div class="donate-form-title">Donate form</div>
                   <div class="donate-form-input-container">
                     <div class="donate-bloodtype-container">
                       <div>Blood Type :</div>
-                      <select id="donate-bloodType" required>
+                      <select id="donate-bloodType">
                         <option value="" disabled selected>
                           Select the blood type
                         </option>
@@ -519,27 +202,49 @@
                         <option value="O">O</option>
                         <option value="AB">AB</option>
                       </select>
+                      <div
+                        class="error-container"
+                        id="donate-bloodType-error"
+                      ></div>
                     </div>
                     <div class="donate-rhfactor-container">
                       <div>Rh factor :</div>
-                      <select id="donate-rhfactor" required>
+                      <select id="donate-rhFactor">
                         <option value="" disabled selected>
                           Select the Rh factor
                         </option>
                         <option value="positive">Positive</option>
                         <option value="negative">Negative</option>
                       </select>
+                      <div
+                        class="error-container"
+                        id="donate-rhFactor-error"
+                      ></div>
                     </div>
                     <div class="donate-units-container">
                       <div>Units to Donate :</div>
-                      <input type="number" step="any" />
+                      <input
+                        type="number"
+                        step="any"
+                        id="donate-unitsToDonate"
+                      />
+                      <div
+                        class="error-container"
+                        id="donate-unitsToDonate-error"
+                      ></div>
                     </div>
                     <div class="donate-date-conatainer">
                       <div>Date Time :</div>
-                      <input type="datetime-local" />
+                      <input type="datetime-local" id="donate-dateTime" />
+                      <div
+                        class="error-container"
+                        id="donate-dateTime-error"
+                      ></div>
                     </div>
                   </div>
-                  <div class="donate-center-btn">Donate</div>
+                  <div class="donate-center-btn" id="dialogForm-donate-btn">
+                    Donate
+                  </div>
                 </div>
               </div>
             </div>
@@ -757,130 +462,34 @@
               <div
                 class="number-of-Donation-show-card"
                 id="schedule-donation-history-card"
-                onclick="getScheduleDonationHistory()"
               >
                 <div>Scheduled Donations :</div>
-                <div>10</div>
+                <div id="schedule-donation-history-card-value"></div>
               </div>
               <div
                 class="number-of-Donation-show-card"
                 id="approved-donation-history-card"
-                onclick="getApprovedDonationHistory()"
               >
                 <div>Approved Donations :</div>
-                <div>10</div>
+                <div id="approved-donation-history-card-value"></div>
               </div>
               <div
                 class="number-of-Donation-show-card"
                 id="rejected-donation-history-card"
-                onclick="getRejectedDonationHistory()"
               >
                 <div>Rejected Donations :</div>
-                <div>10</div>
+                <div  id="rejected-donation-history-card-value" ></div>
               </div>
             </div>
             <div id="donate-history-card-outer-container">
               <div
                 class="donation-history-card-container"
                 id="donation-history-schedule-card-container"
-              >
-                <div class="donate-history-card">
-                  <div class="donateHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
-                <div class="donate-history-card">
-                  <div class="donateHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donate Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
-                <div class="donate-history-card">
-                  <div class="donateHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Reject Reason :</div>
-                    <div>Not on time</div>
-                  </div>
-                </div>
-              </div>
+              ></div>
               <div
                 class="donation-history-card-container"
                 id="donation-history-approved-card-container"
               >
-                <div class="donate-history-card">
-                  <div class="donateHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="donateHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
               </div>
               <div
                 class="donation-history-card-container"
@@ -895,20 +504,10 @@
                     <th>Rh Factor</th>
                     <th>Donate Units</th>
                     <th>Donation Type</th>
-                    <th>Patient Name / Center Name</th>
                     <th>Donation DateTime</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>Requester</td>
-                    <td>Ramu</td>
-                    <td>2020-12-12 12:12:12</td>
-                  </tr>
-                </tbody>
+                <tbody id="schedule-donation-history-table-body"></tbody>
               </table>
               <table id="donation-history-approved-table">
                 <thead>
@@ -917,19 +516,10 @@
                     <th>Rh Factor</th>
                     <th>Donate Units</th>
                     <th>Donation Type</th>
-                    <th>Patient Name / Center Name</th>
                     <th>Donation DateTime</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>Requester</td>
-                    <td>Ramu</td>
-                    <td>2020-12-12 12:12:12</td>
-                  </tr>
+                <tbody id="approved-donation-history-table-body">
                 </tbody>
               </table>
               <table id="donation-history-rejected-table">
@@ -939,24 +529,32 @@
                     <th>Rh Factor</th>
                     <th>Donated Units</th>
                     <th>Donation Type</th>
-                    <th>Patient Name / Center Name</th>
                     <th>Donation DateTime</th>
                     <th>Reject Reason</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>Requester</td>
-                    <td>Ramu</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>Not on time</td>
-                  </tr>
+                <tbody id="rejected-donation-history-table-body">
                 </tbody>
               </table>
             </div>
+            <div
+                class="no-schedule-donation-history"
+                id="no-schedule-donation-history-message"
+              >
+                No Scheduled Donation History Available!!
+              </div>
+              <div
+                class="no-approved-donation-history"
+                id="no-approved-donation-history-message"
+              >
+                No Approved Donation History Available!!
+              </div>
+              <div
+                class="no-rejected-donation-history"
+                id="no-rejected-donation-history-message"
+              >
+                No Rejected Donation History Available!!
+              </div>
           </div>
           <div id="request-history-container">
             <div class="content-heading">Request History</div>
@@ -964,26 +562,23 @@
               <div
                 class="number-of-request-show-card"
                 id="schedule-request-history-card"
-                onclick="getScheduleRequestHistory()"
               >
                 <div>Scheduled Requests :</div>
-                <div>10</div>
+                <div id="schedule-request-history-card-value"></div>
               </div>
               <div
                 class="number-of-request-show-card"
                 id="approved-request-history-card"
-                onclick="getApprovedRequestHistory()"
               >
                 <div>Approved Requests :</div>
-                <div>10</div>
+                <div id="approved-request-history-card-value"></div>
               </div>
               <div
                 class="number-of-request-show-card"
                 id="rejected-request-history-card"
-                onclick="getRejectedRequestHistory()"
               >
                 <div>Rejected Requests :</div>
-                <div>10</div>
+                <div id="rejected-request-history-card-value"></div>
               </div>
             </div>
             <div id="request-history-card-outer-container">
@@ -991,77 +586,11 @@
                 class="request-history-card-container"
                 id="request-history-schedule-card-container"
               >
-                <div class="request-history-card">
-                  <div class="requestHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
-                <div class="request-history-card">
-                  <div class="requestHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
               </div>
               <div
                 class="request-history-card-container"
                 id="request-history-approved-card-container"
               >
-                <div class="request-history-card">
-                  <div class="requestHistory-card-item-container">
-                    <div>Blood Type :</div>
-                    <div>O</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Rh Factor :</div>
-                    <div>positive</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donated Units :</div>
-                    <div>15</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation Type :</div>
-                    <div>Requester</div>
-                  </div>
-                  <div class="requestHistory-card-item-container">
-                    <div>Donation DateTime :</div>
-                    <div>2020-12-12 12:12:12</div>
-                  </div>
-                </div>
               </div>
               <div
                 class="request-history-card-container"
@@ -1077,26 +606,14 @@
                     <th>Rh Factor</th>
                     <th>Units Needed</th>
                     <th>Contact Number</th>
-                    <th>Request DateTime</th>
                     <th>Hospital Name</th>
                     <th>Hospital Address</th>
                     <th>Doctor Name</th>
                     <th>Doctor Contact Number</th>
+                    <th>Request DateTime</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>1234567890</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>abc hospital</td>
-                    <td>ABC street</td>
-                    <td>rohit</td>
-                    <td>1234567890</td>
-                  </tr>
+                <tbody id="schedule-request-history-table-body">
                 </tbody>
               </table>
               <table id="request-history-approved-table">
@@ -1111,24 +628,10 @@
                     <th>Hospital Name</th>
                     <th>Hospital Address</th>
                     <th>Doctor Name</th>
-                    <th>Doctor Contact Number</th>
                     <th>Requested DateTime</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>13</td>
-                    <td>1234567890</td>
-                    <td>abc hospital</td>
-                    <td>ABC street</td>
-                    <td>rohit</td>
-                    <td>1234567890</td>
-                    <td>2020-12-12 12:12:12</td>
-                  </tr>
+                <tbody id="approved-request-history-table-body">   
                 </tbody>
               </table>
               <table id="request-history-rejected-table">
@@ -1147,116 +650,35 @@
                     <th>Reject Reason</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>1234567890</td>
-                    <td>abc hospital</td>
-                    <td>ABC street</td>
-                    <td>rohit</td>
-                    <td>1234567890</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>Doctor contact number wrong</td>
-                  </tr>
+                <tbody id="rejected-request-history-table-body">
                 </tbody>
               </table>
             </div>
+               <div
+                class="no-schedule-request-history"
+                id="no-schedule-request-history-message"
+              >
+                No Scheduled Request History Available!!
+              </div>
+              <div
+                class="no-approved-request-history"
+                id="no-approved-request-history-message"
+              >
+                No Approved Request History Available!!
+              </div>
+              <div
+                class="no-rejected-request-history"
+                id="no-rejected-request-history-message"
+              >
+                No Rejected Request History Available!!
+              </div>
           </div>
           <div id="approve-donation-container">
             <div class="content-heading">Approve Donations</div>
             <div class="approve-donation-card-container">
-              <div class="donateRequest-card">
-                <div class="approveDonation-card-item-container">
-                  <div>Patient Name :</div>
-                  <div>Praveen kumar</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>AB</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Rh Factor:</div>
-                  <div>positive</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Units Needed :</div>
-                  <div>15</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Contact Number:</div>
-                  <div>9363125315</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Name :</div>
-                  <div>Abc hospital</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Address :</div>
-                  <div>112,ABC nagar cbe - 641567</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Description :</div>
-                  <div>lorem epsum lorem epsum</div>
-                </div>
-                <div class="approve-donation-btn-container">
-                  <button class="approve-donation-button">Accept</button>
-                  <button
-                    class="reject-donation-button"
-                    onclick="openRejectDialogBox()"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
-              <div class="donateRequest-card">
-                <div class="approveDonation-card-item-container">
-                  <div>Patient Name :</div>
-                  <div>Praveen kumar</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>AB</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Rh Factor:</div>
-                  <div>positive</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Units Needed :</div>
-                  <div>15</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Contact Number:</div>
-                  <div>9363125315</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Name :</div>
-                  <div>Abc hospital</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Hospital Address :</div>
-                  <div>112,ABC nagar cbe - 641567</div>
-                </div>
-                <div class="donateRequest-card-item-container">
-                  <div>Description :</div>
-                  <div>lorem epsum lorem epsum</div>
-                </div>
-                <div class="approve-donation-btn-container">
-                  <button class="approve-donation-button">Accept</button>
-                  <button
-                    class="reject-donation-button"
-                    onclick="openRejectDialogBox()"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
             </div>
             <div class="approve-donation-table-container">
-              <table>
+              <table id="approve-donation-table">
                 <thead>
                   <tr>
                     <th>Donor Name</th>
@@ -1264,50 +686,16 @@
                     <th>Rh Factor</th>
                     <th>Units Donated</th>
                     <th>Donate DateTime</th>
-                    <th>Donor Contact Number</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>1234567890</td>
-                    <td>
-                      <div>
-                        <button class="approve-donation-button">Approve</button>
-                        <button
-                          class="reject-donation-button"
-                          onclick="openRejectDialogBox()"
-                        >
-                          Reject
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>1234567890</td>
-                    <td>
-                      <div>
-                        <button class="approve-donation-button">Approve</button>
-                        <button class="reject-donation-button">Reject</button>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody id="approve-donation-table-body">
                 </tbody>
               </table>
             </div>
             <div id="approve-donation-modal" class="modal">
               <div class="approve-donation-form-container">
-                <div class="close-btn" onclick="closeRejectDialogBox()">
+                <div class="close-btn" id="approvalDialogForm-close-btn">
                   &times;
                 </div>
                 <div class="approve-donation-inner-container">
@@ -1315,12 +703,26 @@
                   <div class="approve-donation-form-input-container">
                     <div class="reject-reason-container">
                       <div>Reject Reason :</div>
-                      <textarea class="reject-reason-input"></textarea>
+                      <textarea class="reject-reason-input" id="donation-reject-reason"></textarea>
+                      <div class="error-container" id="donation-reject-reason-error"></div>
                     </div>
                   </div>
-                  <div class="reject-dialog-submit-btn">Submit</div>
+                  <div class="reject-dialog-submit-btn" id="donation-reject-reason-btn">Submit</div>
                 </div>
               </div>
+            </div>
+            <div id="approve-donation-error-container">No Donations Available!!!</div>
+          </div>
+        </div>
+      </div>
+      <div class="container-2">
+        <div id="logout-dialog" class="dialog">
+          <div class="dialog-content">
+            <span class="close-button">&times;</span>
+            <p>Do you want to logout?</p>
+            <div class="dialog-buttons">
+                <button id="yes-button" class="dialog-button">Yes</button>
+                <button id="no-button" class="dialog-button">No</button>
             </div>
           </div>
         </div>

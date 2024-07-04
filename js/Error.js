@@ -10,6 +10,7 @@ export function makeInputBoxBlackColor(idName){
 
 export function showErrorMessage(errorMessage , idName){
     const errorContainer = document.getElementById(idName);
+    errorContainer.style.display = 'block';
     errorContainer.innerHTML = errorMessage;
 }
 
@@ -30,7 +31,7 @@ export function apiErrorMessage(code , errorMessage){
 export function apiSuccessMessage(code , successMessage , setData){
     let successModal = {
         status :'success',
-        errorCode : code,
+        statusCode : code,
         messsage : successMessage,
         data : setData
     }

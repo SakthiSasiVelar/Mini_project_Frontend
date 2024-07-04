@@ -235,7 +235,8 @@ th {
     font-weight: 600;
 }
 
-.activate-admin-button{
+.activate-admin-button-1,
+.activate-admin-button-2{
     background-color: green;
     border: none ;
     color: white;
@@ -278,7 +279,7 @@ th {
 }
 
 .add-center-form-inner-container{
-    border: 1px solid black;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
@@ -334,7 +335,7 @@ th {
     justify-content: center;
 }
 
-.add-center-submit-btn{
+.add-center-submit-btn-style{
     padding: 0.5rem 2rem;
     background-color: blue;
     border: none;
@@ -351,8 +352,10 @@ th {
     width: 100%;
 }
 
-.approve-request-button,
-.reject-request-button {
+.approve-request-button-1,
+.approve-request-button-2,
+.reject-request-button-1,
+.reject-request-button-2 {
     padding: 0.3rem 0.6rem;
     color: white;
     border-radius: 5px;
@@ -360,11 +363,13 @@ th {
     border: none;
 }
 
-.approve-request-button {
+.approve-request-button-1,
+.approve-request-button-2{
     background-color: green;
 }
 
-.reject-request-button {
+.reject-request-button-1,
+.reject-request-button-2{
     background-color: red;
 }
 
@@ -438,6 +443,26 @@ th {
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#active-admin-message{
+    display: none;
+}
+
+.message-style{
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: red;
+}
+
+.activate-admin-card-container{
+    display: none;
+}
+
+.error-container {
+    color: red;
 }
 
 

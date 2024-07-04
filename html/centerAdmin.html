@@ -10,7 +10,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <script src="../js/centerAdmin.js" defer></script>
+    <script src="../js/centerAdmin.js" defer type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <div class="container">
@@ -19,7 +24,6 @@
           <div
             class="menu-container-hamburger"
             id="hamburger"
-            onclick="showSideBar()"
           >
             &#9776;
           </div>
@@ -45,7 +49,6 @@
           <div
             class="sidebar-item-container"
             id="profile-sidebar-container-1"
-            onclick="showProfilePage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
@@ -57,7 +60,6 @@
           <div
             class="sidebar-item-container"
             id="center-informations-sidebar-container-1"
-            onclick="showCenterInformationsPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
@@ -67,7 +69,6 @@
           <div
             class="sidebar-item-container"
             id="approve-donation-sidebar-container-1"
-            onclick="showApproveDonationPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
@@ -77,7 +78,6 @@
           <div
             class="sidebar-item-container"
             id="add-inventory-sidebar-container-1"
-            onclick="showAddInventoryPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-suitcase-medical"></i>
@@ -87,7 +87,6 @@
           <div
             class="sidebar-item-container"
             id="center-bloodUnit-details-sidebar-container-1"
-            onclick="showCenterBloodUnitDetailsPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-droplet"></i>
@@ -99,7 +98,6 @@
           <div
             class="sidebar-item-container"
             id="profile-sidebar-container-2"
-            onclick="showProfilePage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-user"></i>
@@ -111,7 +109,6 @@
           <div
             class="sidebar-item-container"
             id="center-informations-sidebar-container-2"
-            onclick="showCenterInformationsPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-hospital"></i>
@@ -121,7 +118,6 @@
           <div
             class="sidebar-item-container"
             id="approve-donation-sidebar-container-2"
-            onclick="showApproveDonationPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fas fa-check-circle"></i>
@@ -131,7 +127,6 @@
           <div
             class="sidebar-item-container"
             id="add-inventory-sidebar-container-2"
-            onclick="showAddInventoryPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-suitcase-medical"></i>
@@ -141,7 +136,6 @@
           <div
             class="sidebar-item-container"
             id="center-bloodUnit-details-sidebar-container-2"
-            onclick="showCenterBloodUnitDetailsPage()"
           >
             <div class="sidebar-items-icon-container">
               <i class="fa-solid fa-droplet"></i>
@@ -153,153 +147,19 @@
           <div id="profile-container">
             <div class="content-heading">Profile</div>
             <div class="profile-content-container">
-              <div class="profile-item-container">
-                <div class="label">Name :</div>
-                <div>Sakthi sasi velar</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Email :</div>
-                <div>sakthisasivelar@gmail.com</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Gender :</div>
-                <div>Male</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Age :</div>
-                <div>21</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Contact-number :</div>
-                <div>1234567890</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">State :</div>
-                <div>Tamil Nadu</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">City :</div>
-                <div>Coimbatore</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Address :</div>
-                <div>116A,ABC STREET CBE</div>
-              </div>
-              <div class="profile-item-container">
-                <div class="label">Postal Code :</div>
-                <div>641668</div>
-              </div>
             </div>
           </div>
           <div id="center-informations-container">
             <div class="content-heading">Donation Center Information</div>
             <div class="center-information-content-container">
-              <div class="center-information-item-container">
-                <div class="label">Name :</div>
-                <div>Center 1</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">State :</div>
-                <div>Tamil Nadu</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">City :</div>
-                <div>Coimbatore</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">Address :</div>
-                <div>116,abc street</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">Postal Code :</div>
-                <div>641668</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">Contact Number :</div>
-                <div>1234567890</div>
-              </div>
-              <div class="center-information-item-container">
-                <div class="label">Operating Hours :</div>
-                <div>10:00AM - 12:00PM</div>
-              </div>
             </div>
           </div>
           <div id="approve-donation-container">
             <div class="content-heading">Approve Donation</div>
             <div class="approve-donation-card-container">
-              <div class="approve-donation-card">
-                <div class="approveDonation-card-item-container">
-                  <div>Donor Name :</div>
-                  <div>Ramu</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>O</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Rh Factor :</div>
-                  <div>positive</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Units Donated :</div>
-                  <div>15</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Donate DateTime :</div>
-                  <div>2020-12-12 12:12:12</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Donor Contact Number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="approve-donation-btn-container">
-                  <button class="approve-donation-button">Accept</button>
-                  <button
-                    class="reject-donation-button"
-                    onclick="openRejectDialogBox()"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
-              <div class="approve-donation-card">
-                <div class="approveDonation-card-item-container">
-                  <div>Donor Name :</div>
-                  <div>Ramu</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Blood Type :</div>
-                  <div>O</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Rh Factor :</div>
-                  <div>positive</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Units Donated :</div>
-                  <div>15</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Donate DateTime :</div>
-                  <div>2020-12-12 12:12:12</div>
-                </div>
-                <div class="approveDonation-card-item-container">
-                  <div>Donor Contact Number :</div>
-                  <div>1234567890</div>
-                </div>
-                <div class="approve-donation-btn-container">
-                  <button class="approve-donation-button">Accept</button>
-                  <button
-                    class="reject-donation-button"
-                    onclick="openRejectDialogBox()"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
             </div>
             <div class="approve-donation-table-container">
-              <table>
+              <table id="approve-donation-table">
                 <thead>
                   <tr>
                     <th>Donor Name</th>
@@ -307,50 +167,16 @@
                     <th>Rh Factor</th>
                     <th>Units Donated</th>
                     <th>Donate DateTime</th>
-                    <th>Donor Contact Number</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>1234567890</td>
-                    <td>
-                      <div>
-                        <button class="approve-donation-button">Approve</button>
-                        <button
-                          class="reject-donation-button"
-                          onclick="openRejectDialogBox()"
-                        >
-                          Reject
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ramu</td>
-                    <td>O</td>
-                    <td>positive</td>
-                    <td>15</td>
-                    <td>2020-12-12 12:12:12</td>
-                    <td>1234567890</td>
-                    <td>
-                      <div>
-                        <button class="approve-donation-button">Approve</button>
-                        <button class="reject-donation-button">Reject</button>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody id="approve-donation-table-body">
                 </tbody>
               </table>
             </div>
             <div id="approve-donation-modal" class="modal">
               <div class="approve-donation-form-container">
-                <div class="close-btn" onclick="closeRejectDialogBox()">
+                <div class="close-btn" id="approve-donation-reject-form-close-btn">
                   &times;
                 </div>
                 <div class="approve-donation-inner-container">
@@ -358,13 +184,15 @@
                   <div class="approve-donation-form-input-container">
                     <div class="reject-reason-container">
                       <div>Reject Reason :</div>
-                      <textarea  class="reject-reason-input"></textarea>
+                      <textarea  class="reject-reason-input" id="reject-reason-input-1"></textarea>
+                      <div class="error-container" id="reject-reason-input-error"></div>
                     </div>
                   </div>
-                  <div class="reject-dialog-submit-btn">Submit</div>
+                  <div class="reject-dialog-submit-btn" id="approve-donation-dialog-submit-btn">Submit</div>
                 </div>
               </div>
             </div>
+            <div class="show-message" id="show-approve-donation-message">No Donation List Available!!!</div>
           </div>
           <div id="add-inventory-container">
             <div class="content-heading">Add Inventory</div>
@@ -375,44 +203,50 @@
                     <div class="add-inventory-form-input-left-container">
                       <div class="add-inventory-form-input-container">
                         <div>Blood Type :</div>
-                        <select>
-                          <option value=" " disabled selected>Select the blood type</option>
+                        <select id="blood-type">
+                          <option value="" disabled selected>Select the blood type</option>
                           <option>A</option>
                           <option>B</option>
                           <option>O</option>
                           <option>AB</option>
                         </select>
+                        <div class="error-container" id="blood-type-error"></div>
                       </div>
                       <div class="add-inventory-form-input-container">
                         <div>Rh Factor :</div>
-                        <select>
-                          <option value=" " disabled selected>Select the Rh factor</option>
+                        <select id="rh-factor">
+                          <option value="" disabled selected>Select the Rh factor</option>
                           <option>positive</option>
                           <option>negative</option>
                         </select>
+                        <div class="error-container" id="rh-factor-error"></div>
                       </div>
                       <div class="add-inventory-form-input-container">
                         <div>Units :</div>
-                        <input type="number" />
+                        <input type="number" id="units" />
+                        <div class="error-container" id="units-error"></div>
                       </div>
                     </div>
                     <div class="add-inventory-form-input-right-container">
                       <div class="add-inventory-form-input-container">
                         <div>Storing DateTime :</div>
-                        <input type="datetime-local" />
+                        <input type="datetime-local" id="storing-dateTime"/>
+                        <div class="error-container" id="storing-dateTime-error"></div>
                       </div>
                       <div class="add-inventory-form-input-container">
                         <div>Expiry DateTime :</div>
-                        <input type="datetime-local" />
+                        <input type="datetime-local" id="expiration-dateTime" />
+                        <div class="error-container" id="expiration-dateTime-error"></div>
                       </div>
                       <div class="add-inventory-form-input-container">
                         <div>Storing Location :</div>
-                        <input type="text" />
+                        <input type="text" id="storage-location" />
+                        <div class="error-container" id="storage-location-error"></div>
                       </div>
                     </div>
                   </div>
                   <div class="add-inventory-add-btn">
-                       <button class="add-btn">Add</button>
+                       <button class="add-btn" id="add-inventory-btn">Add</button>
                   </div>
               </div>
             </div>
@@ -426,56 +260,56 @@
                     <div class="blood-type-label">A+</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10 </div>
+                  <div class="blood-unit-value" id="a-positive"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">A-</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="a-negative"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">B+</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="b-positive"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">B-</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="b-negative"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">AB+</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="ab-positive"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">AB-</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="ab-negative"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
                     <div class="blood-type-label">O+</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon" ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="o-positive"></div>
                 </div>
                 <div class="bloodUnit-card">
                   <div class="label-container">
-                    <div class="blood-type-label">O-</div>
+                    <div class="blood-type-label" >O-</div>
                     <i class="fa-solid fa-droplet fa-2xl blood-type-label-icon"  ></i>
                   </div>
-                  <div class="blood-unit-value">10</div>
+                  <div class="blood-unit-value" id="o-negative"></div>
                 </div>
                 <div style="width: 200px; height: 110px;">
                 </div>

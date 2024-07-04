@@ -19,19 +19,34 @@ async function login(){
             const result = await loginUser(loginDetails);
             if(result.status ==='success'){
                 showSuccessToast('Logged in successfully');
+                clearLoginForm();
                 addLoginDetailsToSessionStorage(result.data);
                 setTimeout(() => {
                     openHomePage();
-                }, 2000);    
+                }, 800);    
             }
             else if(result.status === 'error'){
-                showErrorToast(result.message);
+                clearLoginForm();
+                if(result.errorCode == 401){
+                    showErrorToast('Invalid email or password');
+                }
+                else if(result.errorCode == 403){
+                    showErrorToast('Your account is not activated.');
+                }
+                else{
+                    showErrorToast('Failed to login. Please try again');
+                }
             }
         }
         catch(error){
-           console.log(error);
+            showErrorToast('Failed to login. Please try again');
         }
     }          
+}
+
+function clearLoginForm(){
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
 }
 
 function addLoginDetailsToSessionStorage(userDetails){
